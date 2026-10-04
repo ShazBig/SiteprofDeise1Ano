@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professora Deise — Colégio Vila Real</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        :root {
+            --primaria: #4A90E2;
+            --sucesso: #58B76C;
+            --fundo: #F8F9FA;
+            --texto: #333333;
+            --destaque: #FFC107;
+        }
+        body { background: var(--fundo); color: var(--texto); line-height: 1.6; }
+        
+        .controles { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 10px; }
+        .ctrl-btn { background: #E9ECEF; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        .ctrl-btn.ativo { background: var(--destaque); }
+        
+        header { background: var(--primaria); color: white; padding: 20px; text-align: center; }
+        h1 { font-size: 24px; margin-bottom: 5px; }
+        .subtitulo { font-size: 16px; opacity: 0.9; }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .secao { background: white; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        h2 { color: var(--primaria); font-size: 20px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 3px solid var(--primaria); }
+        
+        .grade { display: grid; gap: 12px; }
+        .botao-jogo { 
+            background: var(--primaria); color: white; border: none; 
+            border-radius: 12px; padding: 20px; font-size: 20px; cursor: pointer;
+            transition: background 0.2s; width: 100%;
+        }
+        .botao-jogo:hover, .botao-jogo:focus { background: #357ABD; outline: 3px solid #90CAF9; }
+        
+        .espaco { background: #F0F4F8; border-radius: 12px; padding: 18px; margin-top: 12px; }
+        
+        footer { text-align: center; padding: 20px; color: #666; font-size: 15px; }
+        
+        .sem-anim * { animation: none !important; transition: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="controles">
+    <button class="ctrl-btn" id="btnSom">🔊 Som: Ligado</button>
+    <button class="ctrl-btn" id="btnAnim">✨ Animações: Ligadas</button>
+</div>
+
+<header>
+    <h1>🌟 Professora Deise Gomes de Miranda</h1>
+    <p class="subtitulo">Colégio Vila Real • 1º Ano</p>
+</header>
+
+<div class="container">
+
+    <section class="secao">
+        <h2>👋 Bem-vindos!</h2>
+        <p style="font-size: 18px;">
+            Este é o nosso espaço de aprendizado. 💙<br>
+            Aqui todos podem aprender no seu ritmo, com calma e carinho.
+        </p>
+    </section>
+
+    <section class="secao">
+        <h2>🔤 Alfabetização</h2>
+        <p style="margin-bottom: 12px;">Escolha uma atividade:</p>
+        <div class="grade">
+            <button class="botao-jogo" onclick="emBreve()">🖼️ Letra Inicial</button>
+            <button class="botao-jogo" onclick="emBreve()">🧩 Juntar Sílabas</button>
+            <button class="botao-jogo" onclick="emBreve()">📝 Escrever Letras</button>
+            <button class="botao-jogo" onclick="emBreve()">🃏 Memória de Letras</button>
+        </div>
+        <div class="espaco">
+            <strong>📖 Conteúdo:</strong><br>
+            <em>Aqui a professora vai colocar as letras que vamos estudar.</em>
+        </div>
+    </section>
+
+    <section class="secao">
+        <h2>🔢 Matemática</h2>
+        <div class="grade">
+            <button class="botao-jogo" onclick="emBreve()">🔢 Contar Números</button>
+            <button class="botao-jogo" onclick="emBreve()">➕ Mais e Menos</button>
+        </div>
+    </section>
+  
+  <section class="secao">
+        <h2>🦠🧪 Ciências </h2>
+        <div class="grade">
+            <button class="botao-jogo" onclick="emBreve()">♻️ Reutilização do lixo </button>
+        </div>
+  </section>
+  
+  <section class="secao">
+         <h2>🌍 Geografia</h2>
+         <div class="grade">
+             <button class="botao-jogo" onclick="emBreve()">📘 Matéria</button>
+         </div>
+  </section>
+  
+  <section class="secao">
+         <h2>📖🕰️ Historia</h2>
+         <div class="grade">
+             <button class="botao-jogo" onclick="emBreve()">📘 Matéria</button>
+         </div>
+  </section>
+
+    <section class="secao">
+        <h2>💙 Para os pais e cuidadores</h2>
+        <ul style="font-size: 17px; line-height: 1.8; padding-left: 20px;">
+            <li>Botões grandes — fáceis de tocar</li>
+            <li>Cores calmas — não cansam os olhos</li>
+            <li>Aprendizado sem frustração — sempre acertam</li>
+            <li>Mesma estrutura sempre — previsível e seguro</li>
+            <li>Pode desligar som e animações no topo da tela</li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    💙 Feito com carinho para todos os alunos do 1º Ano — Colégio Vila Real<br>
+    << Por: Hugo Raphael de Miranda; IFMG - Campus Sabará >> 💙
+</footer>
+
+<script>
+    let somLigado = true;
+    let animLigado = true;
+    const btnSom = document.getElementById('btnSom');
+    const btnAnim = document.getElementById('btnAnim');
+    const corpo = document.body;
+
+    btnSom.addEventListener('click', () => {
+        somLigado = !somLigado;
+        btnSom.textContent = somLigado ? '🔊 Som: Ligado' : '🔇 Som: Desligado';
+        btnSom.classList.toggle('ativo', !somLigado);
+    });
+
+    btnAnim.addEventListener('click', () => {
+        animLigado = !animLigado;
+        btnAnim.textContent = animLigado ? '✨ Animações: Ligadas' : '✨ Animações: Desligadas';
+        btnAnim.classList.toggle('ativo', !animLigado);
+        corpo.classList.toggle('sem-anim', !animLigado);
+    });
+
+    function emBreve() {
+        alert('🔒 Disponível em breve! 💙\n\nEstamos preparando tudo com muito carinho para vocês! 📚✨');
+    }
+</script>
+</body>
+</html>
