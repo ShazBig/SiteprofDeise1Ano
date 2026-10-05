@@ -10,7 +10,7 @@
 <style>
 :root{
   --ink:#1d2742; --bg:#f4f7fb; --card:#fff; --linha:#d9e1ee; --suave:#5a6580;
-  --azul:#2a64c0; --verde:#1b7f53; --roxo:#6f45bd; --laranja:#a85400; --vinho:#a63b36; --amarelo:#ffc933;
+  --azul:#2a64c0; --verde:#1b7f53; --vermelho:#c0262d; --preto:#1a1a1a; --laranja:#a85400; --vinho:#9c2a6e; --amarelo:#ffc933; --laranjaforte:#ff8400;
   --tam:100%;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -129,10 +129,11 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
 <nav class="menu" aria-label="Disciplinas">
   <ul>
     <li><a href="#alfabetizacao" style="--cor:var(--azul)">Alfabetização</a></li>
-    <li><a href="#matematica" style="--cor:var(--verde)">Matemática</a></li>
-    <li><a href="#ciencias" style="--cor:var(--roxo)">Ciências</a></li>
-    <li><a href="#geografia" style="--cor:var(--laranja)">Geografia</a></li>
-    <li><a href="#historia" style="--cor:var(--vinho)">História</a></li>
+    <li><a href="#matematica" style="--cor:var(--vermelho)">Matemática</a></li>
+    <li><a href="#ciencias" style="--cor:var(--verde)">Ciências</a></li>
+    <li><a href="#geografia" style="--cor:var(--preto)">Geografia</a></li>
+    <li><a href="#historia" style="--cor:var(--laranja)">História</a></li>
+    <li><a href="#arte" style="--cor:var(--vinho)">Arte</a></li>
     <li><a href="#familias" style="--cor:var(--ink)">Para as famílias</a></li>
   </ul>
 </nav>
@@ -144,8 +145,8 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
   <p>Este é o nosso espaço de aprendizado. Aqui todos podem aprender no seu ritmo, com calma e carinho.</p>
 </section>
 
-<section class="secao" id="alfabetizacao" style="--cor:var(--azul)" aria-labelledby="t-alf">
-  <div class="cab"><h2 id="t-alf">🔤 Alfabetização</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
+<section class="secao" id="alfabetizacao/Portugues" style="--cor:var(--azul)" aria-labelledby="t-alf">
+  <div class="cab"><h2 id="t-alf">🔤 Alfabetização/Portugues</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <p>Escolha uma atividade:</p>
   <div class="grade">
     <button class="atividade">🖼️ Letra Inicial</button>
@@ -156,7 +157,7 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
   <div class="conteudo"><strong>📖 Conteúdo:</strong> Aqui a professora vai colocar as letras que vamos estudar.</div>
 </section>
 
-<section class="secao" id="matematica" style="--cor:var(--verde)" aria-labelledby="t-mat">
+<section class="secao" id="matematica" style="--cor:var(--vermelho)" aria-labelledby="t-mat">
   <div class="cab"><h2 id="t-mat">🔢 Matemática</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <div class="grade">
     <button class="atividade">🔢 Contar Números</button>
@@ -164,19 +165,29 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
   </div>
 </section>
 
-<section class="secao" id="ciencias" style="--cor:var(--roxo)" aria-labelledby="t-cie">
+<section class="secao" id="ciencias" style="--cor:var(--verde)" aria-labelledby="t-cie">
   <div class="cab"><h2 id="t-cie">🧪 Ciências</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <div class="grade"><button class="atividade">♻️ Reutilização do lixo</button></div>
 </section>
 
-<section class="secao" id="geografia" style="--cor:var(--laranja)" aria-labelledby="t-geo">
+<section class="secao" id="geografia" style="--cor:var(--amarelo)" aria-labelledby="t-geo">
   <div class="cab"><h2 id="t-geo">🌍 Geografia</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <div class="grade"><button class="atividade">📘 Matéria</button></div>
 </section>
 
-<section class="secao" id="historia" style="--cor:var(--vinho)" aria-labelledby="t-his">
+<section class="secao" id="historia" style="--cor:var(--laranja)" aria-labelledby="t-his">
   <div class="cab"><h2 id="t-his">🕰️ História</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <div class="grade"><button class="atividade">📘 Matéria</button></div>
+</section>
+
+<section class="secao" id="arte" style="--cor:var(--vinho)" aria-labelledby="t-art">
+  <div class="cab"><h2 id="t-art">🎨 Arte</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
+  <div class="grade"><button class="atividade">📘 Matéria</button></div>
+</section>
+
+<section class="secao" id="Livros" style="--cor:var(--laranjaforte)" aria-labelledby="t-liv">
+  <div class="cab"><h2 id="t-liv">📖 Livros</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
+  <div class="grade"><button class="atividade">📖 Ler um Livro</button></div>
 </section>
 
 <section class="secao" id="familias" style="--cor:var(--ink)" aria-labelledby="t-fam">
@@ -195,7 +206,7 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
 
 <footer>
   💙 Feito com carinho para todos os alunos do 1º Ano<br>
-  Por: Hugo Raphael de Miranda - Tecnico de Informática pelo Instituto Federal de Minas Gerais (IFMG) - Campus Sabará<br>
+  Por: Hugo Raphael de Miranda - Técnico em Informática pelo Instituto Federal de Minas Gerais (IFMG) - Campus Sabará
 </footer>
 
 <dialog id="aviso" aria-labelledby="avisoTitulo">
