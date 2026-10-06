@@ -219,11 +219,11 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
 
 <section class="secao" id="Livros" style="--cor:var(--laranjaforte)" aria-labelledby="t-liv">
   <div class="cab"><h2 id="t-liv">📖 Livros</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade"> 📚 Leia Livros</button></div>
+  <div class="grade"><button class="atividade"> 📚 Venha aumentar mais ainda sua Habilidade com Leitura</button></div>
 </section>
 
 <section class="secao" id="familias" style="--cor:var(--ink)" aria-labelledby="t-fam">
-  <div class="cab"><h2 id="t-fam" style="color:var(--ink)">💙 Para os pais e cuidadores</h2><button class="ouvir" aria-pressed="false" style="--cor:var(--ink)">🔊 Ouvir</button></div>
+  <div class="cab"><h2 id="t-fam" style="color:var(--ink)">💙 Para os pais e cuidadores: explicações das acessibilidades</h2><button class="ouvir" aria-pressed="false" style="--cor:var(--ink)">🔊 Ouvir</button></div>
   <ul>
     <li>Botões grandes, fáceis de tocar.</li>
     <li>Cores calmas, que não cansam os olhos.</li>
@@ -279,11 +279,31 @@ function falar(texto) {
   if (!est.som || !('speechSynthesis' in window)) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(limpar(texto));
-  u.lang = 'pt-BR'; u.rate = 0.9;
-  const v = speechSynthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('pt-br')) || speechSynthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('pt'));
+  u.lang = 'pt-BR'; 
+  u.rate = 0.9;
+
+  //  Escolhe SOMENTE vozes femininas em português
+  const vozes = speechSynthesis.getVoices();
+  let v = vozes.find(voz => 
+    voz.lang.toLowerCase().startsWith('pt') && 
+    (voz.name.includes('Feminina') || 
+     voz.name.includes('Feminine') || 
+     voz.name.includes('Google pt-BR') ||
+     voz.name.includes('Maria') ||
+     voz.name.includes('Luciana') ||
+     voz.name.includes('Carmen'))
+  );
+  // Se não achar voz feminina explícita, usa qualquer pt-BR
+  if (!v) {
+    v = vozes.find(voz => voz.lang.toLowerCase().startsWith('pt-br'));
+  }
   if (v) u.voice = v;
+
   $('#guia').classList.add('falando');
-  u.onend = u.onerror = () => { $$('.ouvir').forEach(b => b.setAttribute('aria-pressed', 'false')); $('#guia').classList.remove('falando'); };
+  u.onend = u.onerror = () => { 
+    $$('.ouvir').forEach(b => b.setAttribute('aria-pressed', 'false')); 
+    $('#guia').classList.remove('falando'); 
+  };
   speechSynthesis.speak(u);
 }
 const parar = () => { if ('speechSynthesis' in window) speechSynthesis.cancel(); $$('.ouvir').forEach(b => b.setAttribute('aria-pressed', 'false')); $('#guia').classList.remove('falando'); };
@@ -294,7 +314,7 @@ function aviso(txt) {
   clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 2600);
 }
 
-/* ---------- preferencias ---------- */
+//preferencias de acessibilidade
 function aplicar() {
   document.documentElement.style.setProperty('--tam', TAMS[est.tam] + '%');
   document.body.classList.toggle('sem-anim', !est.anim);
@@ -322,7 +342,7 @@ $('#btnContraste').onclick = () => { est.contraste = !est.contraste; aplicar(); 
 $('#btnMais').onclick = () => { est.tam = Math.min(est.tam + 1, TAMS.length - 1); aplicar(); salvar(); tom([523]); };
 $('#btnMenos').onclick = () => { est.tam = Math.max(est.tam - 1, 0); aplicar(); salvar(); tom([440]); };
 
-/* ---------- leitura em voz alta ---------- */
+//leitura em voz alta
 function lerSecao(sec, btn) {
   if (!est.som) { aviso('Ligue o som para ouvir a leitura'); return; }
   if (btn.getAttribute('aria-pressed') === 'true') { parar(); return; }
@@ -338,7 +358,7 @@ function boasVindas() {
 }
 $('#btnBoasVindas').onclick = $('#btnGuia').onclick = boasVindas;
 
-/* ---------- atividades (em breve) ---------- */
+//atividade indisponiveis
 const dlg = $('#aviso');
 $$('.atividade').forEach(b => b.onclick = () => {
   const nome = limpar(b.textContent);
@@ -350,11 +370,18 @@ $$('.atividade').forEach(b => b.onclick = () => {
 $('#fechar').onclick = () => dlg.close();
 dlg.addEventListener('close', parar);
 
-/* ---------- animacao de entrada das secoes ---------- */
+//animacao de entrada das secoes 
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('visivel'); io.unobserve(e.target); }
 }), { threshold: 0.12 });
 $$('.secao').forEach(s => io.observe(s));
+
+// garante que as vozes sejam carregadas antes de usar
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = () => {};
+}
+
+aplicar();
 
 aplicar();
 </script>
