@@ -2,7 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f4f9e">
+<meta name="description" content="Salinha da Professora Deise Gomes de Miranda — espaço de aprendizado da turma do 1º Ano, com atividades, leitura em voz alta e recursos de acessibilidade.">
 <title>Salinha da Professora Deise Gomes de Miranda · 1º Ano</title>
 <link rel="icon" href="professoraDeise.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,69 +12,76 @@
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1d2742; --bg:#f4f7fb; --card:#fff; --linha:#d9e1ee; --suave:#5a6580;
-  --azul:#2a64c0; --verde:#1b7f53; --vermelho:#c0262d; --preto:#1a1a1a; --laranja:#a85400; --vinho:#9c2a6e; --amarelo:#ffc933; --laranjaforte:#ff7f00;
+  --ink:#1d2742; --bg:#f3f6fb; --card:#fff; --linha:#d9e1ee; --suave:#4f5b78;
+  --azul:#2a64c0; --verde:#1b7f53; --vermelho:#c0262d; --preto:#1a1a1a; --laranja:#a85400; --vinho:#9c2a6e; --amarelo:#ffc933; --laranjaforte:#c25e00;
   --tam:100%;
+  --fonte-titulo:'Fredoka','Atkinson Hyperlegible',Verdana,sans-serif;
+  --fonte-texto:'Atkinson Hyperlegible',Verdana,Arial,sans-serif;
+  --sombra:0 2px 4px rgba(29,39,66,.06),0 10px 28px rgba(29,39,66,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{font-size:var(--tam);scroll-behavior:smooth;scroll-padding-top:5rem}
-body{font-family:'Atkinson Hyperlegible',Verdana,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:1.05rem}
-h1,h2,h3{font-family:'Fredoka','Atkinson Hyperlegible',Verdana,sans-serif;font-weight:600;line-height:1.2}
-button{font:inherit;cursor:pointer}
+html{font-size:var(--tam);scroll-behavior:smooth;scroll-padding-top:5.2rem;-webkit-text-size-adjust:100%}
+body{font-family:var(--fonte-texto);background:var(--bg);color:var(--ink);line-height:1.7;font-size:1.0625rem;overflow-x:hidden}
+h1,h2,h3{font-family:var(--fonte-titulo);font-weight:600;line-height:1.2}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%;height:auto}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 6px var(--amarelo)}
 
-.pular{position:absolute;left:-999px;top:0;background:var(--amarelo);color:var(--ink);padding:.75rem 1rem;z-index:100;font-weight:700}
+.pular{position:absolute;left:-999px;top:0;background:var(--amarelo);color:var(--ink);padding:.8rem 1rem;z-index:300;font-weight:700;border-radius:.6rem}
 .pular:focus{left:.5rem;top:.5rem}
 
-/* barra de acessibilidade */
-.barra{position:sticky;top:0;z-index:50;background:var(--ink);color:#fff;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;padding:.6rem 1rem}
-.barra .titulo{font-weight:700;margin-right:.5rem;font-size:.95rem}
-.ferr{background:#fff;color:var(--ink);border:2px solid #fff;border-radius:999px;padding:.4rem .9rem;font-size:.95rem;font-weight:700;display:inline-flex;gap:.4rem;align-items:center}
-.ferr[aria-pressed="false"]{background:transparent;color:#fff}
-.ferr:hover{background:var(--amarelo);color:var(--ink);border-color:var(--amarelo)}
-.grupo{display:inline-flex;gap:.35rem;align-items:center}
-.grupo output{font-size:.9rem;min-width:3.2rem;text-align:center}
-
-/* cabecalho */
-header.topo{background:#1f4f9e;color:#fff;padding:3rem 1.25rem 3.5rem;text-align:center}
-.blocos{display:flex;gap:.6rem;justify-content:center;margin-bottom:1.5rem}
-.blocos span{width:3rem;height:3rem;border-radius:.7rem;display:grid;place-items:center;font:600 1.5rem 'Fredoka',sans-serif;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.25);animation:bob 3s ease-in-out infinite}
+/* ---------- topo ---------- */
+header.topo{
+  position:relative;color:#fff;text-align:center;
+  padding:calc(3rem + env(safe-area-inset-top,0px)) 1.25rem 4.5rem;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.14),transparent 40%),
+    radial-gradient(circle at 85% 80%,rgba(255,201,51,.18),transparent 45%),
+    linear-gradient(160deg,#1f4f9e 0%,#2a64c0 100%);
+  border-radius:0 0 2.5rem 2.5rem;
+}
+.blocos{display:flex;gap:.55rem;justify-content:center;margin-bottom:1.5rem}
+.blocos span{width:2.9rem;height:2.9rem;border-radius:.75rem;display:grid;place-items:center;font:600 1.45rem var(--fonte-titulo);color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.25);animation:bob 3s ease-in-out infinite}
 .blocos span:nth-child(1){background:#ffc933}
 .blocos span:nth-child(2){background:#8fd3a8;animation-delay:.25s}
 .blocos span:nth-child(3){background:#ffadad;animation-delay:.5s}
 .blocos span:nth-child(4){background:#a9c9ff;animation-delay:.75s}
 .blocos span:nth-child(5){background:#d4b8ff;animation-delay:1s}
 .blocos span:nth-child(6){background:#ffd6a5;animation-delay:1.25s}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
-header.topo h1{font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:.4rem}
-.sub{font-size:1.2rem;opacity:.95;margin-bottom:1.5rem}
-.btn-hero{background:var(--amarelo);color:var(--ink);border:0;border-radius:999px;padding:.8rem 1.6rem;font-weight:700;font-size:1.05rem}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+header.topo h1{font-size:clamp(1.7rem,6vw,2.9rem);margin:0 auto .5rem;max-width:20ch}
+.sub{display:inline-block;font-size:1.1rem;font-weight:700;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:.25rem 1.1rem;border-radius:999px;margin-bottom:1.6rem}
+.btn-hero{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.4rem;background:var(--amarelo);color:var(--ink);border:0;border-radius:999px;padding:.8rem 1.8rem;font-weight:700;font-size:1.08rem;box-shadow:0 5px 0 rgba(0,0,0,.22);transition:transform .15s,box-shadow .15s}
 .btn-hero:hover{background:#fff}
+.btn-hero:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.22)}
 
-/* navegacao */
-nav.menu{background:#fff;border-bottom:1px solid var(--linha)}
-nav.menu ul{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:.9rem 1rem;max-width:960px;margin:0 auto}
-nav.menu a{display:block;padding:.45rem .95rem;border-radius:999px;border:2px solid var(--cor);color:var(--cor);text-decoration:none;font-weight:700;font-size:.95rem}
-nav.menu a:hover{background:var(--cor);color:#fff}
+/* ---------- navegação (chips que rolam de lado no celular) ---------- */
+nav.menu{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding-top:env(safe-area-inset-top,0px);margin-top:-1.6rem}
+nav.menu ul{list-style:none;display:flex;gap:.55rem;padding:.75rem 1rem;max-width:1000px;margin:0 auto;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.menu ul::-webkit-scrollbar{display:none}
+nav.menu li{flex:0 0 auto;scroll-snap-align:center}
+nav.menu a{display:flex;align-items:center;min-height:2.9rem;padding:.4rem 1.05rem;border-radius:999px;border:2px solid var(--cor);color:var(--cor);text-decoration:none;font-weight:700;font-size:.97rem;white-space:nowrap;background:#fff;transition:background .15s,color .15s}
+nav.menu a:hover,nav.menu a.ativo{background:var(--cor);color:#fff}
 
-main{max-width:960px;margin:0 auto;padding:2rem 1.25rem}
-.secao{background:var(--card);border:1px solid var(--linha);border-left:10px solid var(--cor);border-radius:1rem;padding:1.6rem;margin-bottom:1.5rem}
-.cab{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
-.cab h2{font-size:1.6rem;color:var(--cor)}
-.ouvir{background:transparent;color:var(--cor);border:2px solid var(--cor);border-radius:999px;padding:.4rem 1rem;font-weight:700}
+/* ---------- conteúdo ---------- */
+main{max-width:1000px;margin:0 auto;padding:1.8rem 1.1rem 2.5rem}
+.secao{background:var(--card);border:1px solid var(--linha);border-top:8px solid var(--cor);border-radius:1.2rem;padding:1.6rem;margin-bottom:1.5rem;box-shadow:var(--sombra)}
+.cab{display:flex;justify-content:space-between;align-items:center;gap:.8rem 1rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.cab h2{font-size:clamp(1.3rem,4.5vw,1.65rem);color:var(--cor)}
+.ouvir{display:inline-flex;align-items:center;gap:.4rem;min-height:2.9rem;background:transparent;color:var(--cor);border:2px solid var(--cor);border-radius:999px;padding:.4rem 1.1rem;font-weight:700;transition:background .15s,color .15s}
 .ouvir:hover,.ouvir[aria-pressed="true"]{background:var(--cor);color:#fff}
 .secao p{margin-bottom:1rem}
-.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.9rem}
-.atividade{background:var(--cor);color:#fff;border:0;border-radius:.9rem;padding:1.3rem 1rem;font-size:1.2rem;font-weight:700;box-shadow:0 4px 0 rgba(0,0,0,.28);transition:transform .15s,box-shadow .15s}
-.atividade:hover{transform:translateY(-3px);box-shadow:0 7px 0 rgba(0,0,0,.28)}
-.atividade:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.28)}
-.conteudo{background:#eef3fa;border-radius:.8rem;padding:1.1rem 1.2rem;margin-top:1.1rem}
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(14.5rem,1fr));gap:.95rem}
+.atividade{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;min-height:5.2rem;background:var(--cor);color:#fff;border:0;border-radius:1rem;padding:1.15rem 1rem;font-size:1.15rem;font-weight:700;line-height:1.3;box-shadow:0 5px 0 rgba(0,0,0,.28);transition:transform .15s,box-shadow .15s}
+.atividade:hover{transform:translateY(-3px);box-shadow:0 8px 0 rgba(0,0,0,.28)}
+.atividade:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.28)}
+.atividade .breve{font-size:.78rem;font-weight:700;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:.05rem .7rem}
+.conteudo{background:#eef3fa;border-radius:.9rem;padding:1.1rem 1.2rem;margin-top:1.1rem;border:1px dashed var(--linha)}
 .secao ul{padding-left:1.3rem}
-.secao li{margin-bottom:.4rem}
+.secao li{margin-bottom:.5rem}
 
-
-/* professora (guia de boas-vindas) */
-.guia{display:flex;align-items:center;gap:1.5rem}
+/* professora (guia) */
+.guia{display:flex;align-items:center;gap:1.6rem}
 .guia-btn{background:none;border:0;flex:none;width:min(11rem,38%);border-radius:1rem}
 .guia-btn img{display:block;width:100%;height:auto;transform-origin:50% 100%;animation:acena 5s ease-in-out infinite}
 .guia.falando .guia-btn img{animation:fala .55s ease-in-out infinite}
@@ -83,81 +92,108 @@ main{max-width:960px;margin:0 auto;padding:2rem 1.25rem}
 .balao::before{left:-15px;border-right-color:var(--bb)}
 .balao::after{left:-10px;border-right-color:var(--bf)}
 .balao p:last-child{margin-bottom:0}
-.balao .nome{font:600 1.25rem 'Fredoka',sans-serif;margin-bottom:.4rem}
+.balao .nome{font:600 1.25rem var(--fonte-titulo);margin-bottom:.4rem}
+
+footer{background:var(--ink);color:#fff;text-align:center;padding:2.2rem 1.2rem calc(6.5rem + env(safe-area-inset-bottom,0px));font-size:.95rem;border-radius:2rem 2rem 0 0;line-height:1.7}
+footer .linha{max-width:46ch;margin:0 auto}
+
+/* ---------- painel de acessibilidade (botão flutuante) ---------- */
+.acc{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:max(1rem,env(safe-area-inset-bottom,0px));z-index:200}
+.acc-fab{display:inline-flex;align-items:center;gap:.55rem;min-height:3.5rem;padding:.5rem 1.2rem .5rem 1rem;border-radius:999px;border:3px solid #fff;background:var(--ink);color:#fff;font-weight:700;font-size:1rem;box-shadow:0 6px 22px rgba(0,0,0,.35)}
+.acc-fab .ico{font-size:1.4rem;line-height:1}
+.acc-painel{position:absolute;right:0;bottom:4.4rem;width:min(21rem,calc(100vw - 2rem));max-height:calc(100vh - 8rem);max-height:calc(100dvh - 8rem);overflow-y:auto;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:1.2rem;padding:1.1rem;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.acc-painel[hidden]{display:none}
+.acc-painel h2{font-size:1.2rem;margin-bottom:.8rem}
+.acc-lista{display:grid;gap:.55rem}
+.ferr{display:flex;align-items:center;gap:.6rem;width:100%;min-height:3.2rem;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:.9rem;padding:.5rem .9rem;font-weight:700;font-size:1rem;text-align:left}
+.ferr[aria-pressed="true"]{background:var(--ink);color:#fff}
+.ferr:hover{background:var(--amarelo);color:var(--ink);border-color:var(--ink)}
+.ferr .ic{font-size:1.25rem;width:1.6rem;text-align:center}
+.tam{display:grid;grid-template-columns:1fr auto 1fr;gap:.55rem;align-items:center}
+.tam .ferr{justify-content:center;text-align:center}
+.tam output{min-width:3.6rem;text-align:center;font-weight:700}
+
+/* aviso em janela */
+dialog{border:0;border-radius:1.3rem;padding:2rem 1.6rem;max-width:26rem;width:calc(100% - 2rem);margin:auto;text-align:center;color:var(--ink)}
+dialog::backdrop{background:rgba(29,39,66,.65)}
+dialog h3{font-size:1.5rem;margin:.5rem 0}
+dialog .ico{font-size:2.6rem}
+dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#fff;border:0;border-radius:999px;padding:.8rem 2.2rem;font-weight:700;font-size:1.05rem}
+.toast{position:fixed;left:50%;bottom:calc(5.8rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);width:max-content;max-width:calc(100vw - 2rem);background:var(--ink);color:#fff;padding:.75rem 1.2rem;border-radius:1rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:250;font-weight:700;text-align:center;line-height:1.4}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* sem animações */
+.sem-anim *,.sem-anim *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+
+/* alto contraste */
+.contraste{--bg:#000;--card:#000;--ink:#fff;--linha:#fff;--suave:#fff;background:#000;color:#fff}
+.contraste .secao{border:3px solid #fff;border-top-width:8px;box-shadow:none}
+.contraste .cab h2,.contraste .ouvir{color:#ffe600;border-color:#ffe600}
+.contraste .ouvir:hover,.contraste .ouvir[aria-pressed="true"]{background:#ffe600;color:#000}
+.contraste .atividade,.contraste .btn-hero,.contraste dialog button{background:#ffe600;color:#000}
+.contraste .atividade .breve{background:#000;color:#ffe600;border-color:#000}
+.contraste header.topo{background:#000;border-bottom:3px solid #fff;border-radius:0}
+.contraste nav.menu{background:#000;border-bottom:3px solid #fff}
+.contraste nav.menu a{color:#ffe600;border-color:#ffe600;background:transparent}
+.contraste nav.menu a:hover,.contraste nav.menu a.ativo{background:#ffe600;color:#000}
+.contraste .conteudo{background:#111;border:2px solid #fff}
+.contraste .acc-fab{background:#ffe600;color:#000;border-color:#000}
+.contraste .acc-painel{background:#000;color:#fff;border:3px solid #fff}
+.contraste .ferr{background:#000;color:#fff;border-color:#fff}
+.contraste .ferr[aria-pressed="true"]{background:#ffe600;color:#000;border-color:#ffe600}
+.contraste .ferr:hover{background:#ffe600;color:#000}
+.contraste dialog{background:#000;color:#fff;border:3px solid #fff}
+.contraste .balao{--bb:#ffe600;--bf:#111}
+.contraste footer{background:#000;border-top:3px solid #fff;border-radius:0}
+.contraste .toast{background:#ffe600;color:#000}
+.contraste :focus-visible{outline-color:#ffe600;box-shadow:0 0 0 6px #000}
+
+/* ---------- celular ---------- */
 @media (max-width:36rem){
+  body{font-size:1.1rem}
+  header.topo{padding-bottom:4rem;border-radius:0 0 1.8rem 1.8rem}
+  .blocos span{width:2.4rem;height:2.4rem;font-size:1.2rem;border-radius:.6rem}
+  .btn-hero{width:100%;max-width:22rem}
+  main{padding:1.4rem .8rem 2rem}
+  .secao{padding:1.2rem 1rem;border-radius:1rem}
+  .cab{flex-direction:column;align-items:stretch}
+  .ouvir{justify-content:center;width:100%;min-height:3.2rem}
+  .grade{grid-template-columns:1fr}
+  .atividade{min-height:5.6rem;font-size:1.2rem}
   .guia{flex-direction:column;text-align:center}
   .guia-btn{width:10rem}
   .balao::before,.balao::after{left:50%;top:auto;margin:0 0 0 -12px;border:12px solid transparent;border-top:0}
   .balao::before{top:-15px;border-bottom-color:var(--bb)}
   .balao::after{top:-10px;border-bottom-color:var(--bf)}
+  .acc-painel{position:fixed;left:.7rem;right:.7rem;bottom:calc(5.2rem + env(safe-area-inset-bottom,0px));width:auto}
+  dialog{margin:auto auto 1rem;border-radius:1.3rem}
 }
-
-footer{background:var(--ink);color:#fff;text-align:center;padding:2rem 1rem;font-size:.95rem}
-
-/* aviso em janela */
-dialog{border:0;border-radius:1.1rem;padding:2rem;max-width:26rem;width:calc(100% - 2rem);margin:auto;text-align:center;color:var(--ink)}
-dialog::backdrop{background:rgba(29,39,66,.65)}
-dialog h3{font-size:1.5rem;margin:.5rem 0}
-dialog .ico{font-size:2.6rem}
-dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;border-radius:999px;padding:.8rem 2rem;font-weight:700;font-size:1.05rem}
-.toast{position:fixed;left:50%;bottom:1.2rem;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:.7rem 1.2rem;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:80;font-weight:700}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-
-/* entrada suave das secoes (so se animacoes estiverem ligadas) */
-.js .secao{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
-.js .secao.visivel{opacity:1;transform:none}
-
-/* sem animacoes */
-.sem-anim *,.sem-anim *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-.sem-anim .secao{opacity:1!important;transform:none!important}
-
-/* alto contraste */
-.contraste{--bg:#000;--card:#000;--ink:#fff;--linha:#fff;--suave:#fff;background:#000;color:#fff}
-.contraste .secao{border:3px solid #fff;border-left-width:10px}
-.contraste .cab h2,.contraste .ouvir{color:#ffe600;border-color:#ffe600}
-.contraste .ouvir:hover,.contraste .ouvir[aria-pressed="true"]{background:#ffe600;color:#000}
-.contraste .atividade,.contraste .btn-hero,.contraste dialog button{background:#ffe600;color:#000}
-.contraste header.topo,.contraste nav.menu{background:#000;border-bottom:3px solid #fff}
-.contraste nav.menu a{color:#ffe600;border-color:#ffe600;background:transparent}
-.contraste nav.menu a:hover{background:#ffe600;color:#000}
-.contraste .conteudo{background:#111;border:2px solid #fff}
-.contraste .barra{background:#000;border-bottom:3px solid #fff}
-.contraste dialog{background:#000;color:#fff;border:3px solid #fff}
-.contraste .balao{--bb:#ffe600;--bf:#111}
-.contraste footer{background:#000;border-top:3px solid #fff}
-.contraste :focus-visible{outline-color:#ffe600;box-shadow:0 0 0 6px #000}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
 <a class="pular" href="#conteudo-principal">Pular para o conteúdo</a>
 
-<div class="barra" role="toolbar" aria-label="Opções de acessibilidade">
-  <span class="titulo">Acessibilidade</span>
-  <button class="ferr" id="btnSom" aria-pressed="true"><span class="ic" aria-hidden="true">🔊</span><span class="rot">Som: ligado</span></button>
-  <button class="ferr" id="btnAnim" aria-pressed="true"><span aria-hidden="true">✨</span><span class="rot">Animações: ligadas</span></button>
-  <button class="ferr" id="btnContraste" aria-pressed="false"><span aria-hidden="true">◐</span><span class="rot">Alto contraste</span></button>
-  <span class="grupo" role="group" aria-label="Tamanho da letra">
-    <button class="ferr" id="btnMenos" aria-label="Diminuir letra">A−</button>
-    <output id="tamRot" aria-live="polite">100%</output>
-    <button class="ferr" id="btnMais" aria-label="Aumentar letra">A+</button>
-  </span>
-</div>
-
 <header class="topo">
   <div class="blocos" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>1</span><span>2</span><span>3</span></div>
   <h1>Salinha da Professora Deise Gomes de Miranda</h1>
-  <p class="sub">Turma do 1º Ano</p>
-  <button class="btn-hero" id="btnBoasVindas">🔊 Ouvir as boas-vindas</button>
+  <p class="sub">Turma do 1º Ano</p><br>
+  <button class="btn-hero" id="btnBoasVindas"><span aria-hidden="true">🔊</span> Ouvir as boas-vindas</button>
 </header>
 
 <nav class="menu" aria-label="Disciplinas">
   <ul>
+    <li><a href="#boas-vindas" style="--cor:var(--azul)">Início</a></li>
     <li><a href="#alfabetizacao" style="--cor:var(--azul)">Alfabetização</a></li>
     <li><a href="#matematica" style="--cor:var(--vermelho)">Matemática</a></li>
     <li><a href="#ciencias" style="--cor:var(--verde)">Ciências</a></li>
     <li><a href="#geografia" style="--cor:var(--preto)">Geografia</a></li>
     <li><a href="#historia" style="--cor:var(--laranja)">História</a></li>
     <li><a href="#arte" style="--cor:var(--vinho)">Arte</a></li>
+    <li><a href="#livros" style="--cor:var(--laranjaforte)">Livros</a></li>
     <li><a href="#familias" style="--cor:var(--ink)">Para as famílias</a></li>
   </ul>
 </nav>
@@ -181,10 +217,10 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
   <div class="cab"><h2 id="t-alf">🔤 Alfabetização</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <p>Escolha uma atividade:</p>
   <div class="grade">
-    <button class="atividade">🖼️ Letra Inicial</button>
-    <button class="atividade">🧩 Juntar Sílabas</button>
-    <button class="atividade">📝 Escrever Letras</button>
-    <button class="atividade">🃏 Memória de Letras</button>
+    <button class="atividade"><span class="nome">🖼️ Letra Inicial</span><span class="breve">Em breve</span></button>
+    <button class="atividade"><span class="nome">🧩 Juntar Sílabas</span><span class="breve">Em breve</span></button>
+    <button class="atividade"><span class="nome">📝 Escrever Letras</span><span class="breve">Em breve</span></button>
+    <button class="atividade"><span class="nome">🃏 Memória de Letras</span><span class="breve">Em breve</span></button>
   </div>
   <div class="conteudo"><strong>📖 Conteúdo:</strong> Aqui a professora vai colocar as letras que vamos estudar.</div>
 </section>
@@ -192,54 +228,76 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
 <section class="secao" id="matematica" style="--cor:var(--vermelho)" aria-labelledby="t-mat">
   <div class="cab"><h2 id="t-mat">🔢 Matemática</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <div class="grade">
-    <button class="atividade">🔢 Contar Números</button>
-    <button class="atividade">➕ Mais e Menos</button>
+    <button class="atividade"><span class="nome">🔢 Contar Números</span><span class="breve">Em breve</span></button>
+    <button class="atividade"><span class="nome">➕ Mais e Menos</span><span class="breve">Em breve</span></button>
   </div>
 </section>
 
 <section class="secao" id="ciencias" style="--cor:var(--verde)" aria-labelledby="t-cie">
   <div class="cab"><h2 id="t-cie">🧪 Ciências</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade">♻️ Reutilização do lixo</button></div>
+  <div class="grade"><button class="atividade"><span class="nome">♻️ Reutilização do lixo</span><span class="breve">Em breve</span></button></div>
 </section>
 
 <section class="secao" id="geografia" style="--cor:var(--preto)" aria-labelledby="t-geo">
   <div class="cab"><h2 id="t-geo">🌍 Geografia</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade">📘 Matéria</button></div>
+  <div class="grade"><button class="atividade"><span class="nome">📘 Matéria</span><span class="breve">Em breve</span></button></div>
 </section>
 
 <section class="secao" id="historia" style="--cor:var(--laranja)" aria-labelledby="t-his">
   <div class="cab"><h2 id="t-his">🕰️ História</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade">📘 Matéria</button></div>
+  <div class="grade"><button class="atividade"><span class="nome">📘 Matéria</span><span class="breve">Em breve</span></button></div>
 </section>
 
 <section class="secao" id="arte" style="--cor:var(--vinho)" aria-labelledby="t-art">
   <div class="cab"><h2 id="t-art">🎨 Arte</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade">📘 Matéria</button></div>
+  <div class="grade"><button class="atividade"><span class="nome">📘 Matéria</span><span class="breve">Em breve</span></button></div>
 </section>
 
-<section class="secao" id="Livros" style="--cor:var(--laranjaforte)" aria-labelledby="t-liv">
+<section class="secao" id="livros" style="--cor:var(--laranjaforte)" aria-labelledby="t-liv">
   <div class="cab"><h2 id="t-liv">📖 Livros</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade"> 📚 Venha aumentar mais ainda sua Habilidade com Leitura</button></div>
+  <div class="grade"><button class="atividade"><span class="nome">📚 Venha aumentar mais ainda sua Habilidade com Leitura</span><span class="breve">Em breve</span></button></div>
 </section>
 
 <section class="secao" id="familias" style="--cor:var(--ink)" aria-labelledby="t-fam">
-  <div class="cab"><h2 id="t-fam" style="color:var(--ink)">💙 Para os pais e cuidadores: explicações das acessibilidades</h2><button class="ouvir" aria-pressed="false" style="--cor:var(--ink)">🔊 Ouvir</button></div>
+  <div class="cab"><h2 id="t-fam">💙 Para os pais e cuidadores: explicações das acessibilidades</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
   <ul>
-    <li>Botões grandes, fáceis de tocar.</li>
+    <li>Botões grandes, fáceis de tocar com o dedo.</li>
     <li>Cores calmas, que não cansam os olhos.</li>
     <li>Leitura em voz alta de cada seção, com o botão Ouvir.</li>
     <li>Tamanho da letra ajustável e modo de alto contraste.</li>
     <li>Navegação completa pelo teclado e compatível com leitores de tela.</li>
-    <li>Som e animações podem ser desligados na barra do topo.</li>
+    <li>Som e animações podem ser desligados no botão Acessibilidade, no canto da tela.</li>
+    <li>Se o áudio não tocar no celular, aumente o volume de mídia e desligue o modo silencioso.</li>
   </ul>
 </section>
 
 </main>
 
 <footer>
-  💙 Feito com carinho para todos os alunos do 1º Ano<br>
-  Por: Hugo Raphael de Miranda - Técnico em Informática pelo Instituto Federal de Minas Gerais (IFMG) - Campus Sabará
+  <div class="linha">
+    💙 Feito com carinho para todos os alunos do 1º Ano<br>
+    Por: Hugo Raphael de Miranda - Técnico em Informática pelo Instituto Federal de Minas Gerais (IFMG) - Campus Sabará
+  </div>
 </footer>
+
+<!-- Painel de acessibilidade -->
+<div class="acc" id="acc">
+  <div class="acc-painel" id="accPainel" role="group" aria-label="Opções de acessibilidade" hidden>
+    <h2>Acessibilidade</h2>
+    <div class="acc-lista">
+      <button class="ferr" id="btnSom" aria-pressed="true"><span class="ic" aria-hidden="true">🔊</span><span class="rot">Som: ligado</span></button>
+      <button class="ferr" id="btnAnim" aria-pressed="true"><span class="ic" aria-hidden="true">✨</span><span class="rot">Animações: ligadas</span></button>
+      <button class="ferr" id="btnContraste" aria-pressed="false"><span class="ic" aria-hidden="true">◐</span><span class="rot">Alto contraste</span></button>
+      <div class="tam" role="group" aria-label="Tamanho da letra">
+        <button class="ferr" id="btnMenos" aria-label="Diminuir letra">A−</button>
+        <output id="tamRot" aria-live="polite">100%</output>
+        <button class="ferr" id="btnMais" aria-label="Aumentar letra">A+</button>
+      </div>
+      <button class="ferr" id="btnParar"><span class="ic" aria-hidden="true">⏹️</span><span class="rot">Parar a leitura</span></button>
+    </div>
+  </div>
+  <button class="acc-fab" id="accFab" aria-expanded="false" aria-controls="accPainel"><span class="ico" aria-hidden="true">♿</span><span>Acessibilidade</span></button>
+</div>
 
 <dialog id="aviso" aria-labelledby="avisoTitulo">
   <div class="ico" aria-hidden="true">🔒</div>
@@ -250,71 +308,122 @@ dialog button{margin-top:1.2rem;background:var(--azul);color:#fff;border:0;borde
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-document.documentElement.classList.add('js');
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const TAMS = [100, 112, 125, 140];
 const est = { som: true, anim: !matchMedia('(prefers-reduced-motion: reduce)').matches, contraste: false, tam: 0 };
 try { Object.assign(est, JSON.parse(localStorage.getItem('prefsDeise') || '{}')); } catch (e) {}
 const salvar = () => { try { localStorage.setItem('prefsDeise', JSON.stringify(est)); } catch (e) {} };
 
-/* ---------- som: efeitos (Web Audio) e leitura em voz alta (fala do navegador) ---------- */
+/* ---------- efeitos sonoros (Web Audio) ---------- */
 let ctx;
 function tom(notas) {
   const AC = window.AudioContext || window.webkitAudioContext;
   if (!est.som || !AC) return;
-  ctx = ctx || new AC();
-  if (ctx.state === 'suspended') ctx.resume();
-  notas.forEach((f, i) => {
-    const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime + i * 0.12;
-    o.type = 'sine'; o.frequency.value = f;
-    g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(0.15, t + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
-    o.connect(g).connect(ctx.destination);
-    o.start(t); o.stop(t + 0.3);
-  });
+  try {
+    ctx = ctx || new AC();
+    if (ctx.state === 'suspended') ctx.resume();
+    notas.forEach((f, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime + i * 0.12;
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.15, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+      o.connect(g).connect(ctx.destination);
+      o.start(t); o.stop(t + 0.3);
+    });
+  } catch (e) {}
 }
+
+/* ---------- leitura em voz alta (funciona no celular) ----------
+   Ajustes para o celular:
+   - o texto é dividido em trechos curtos (falas longas são ignoradas no celular);
+   - só cancelamos a fala anterior se houver algo falando (cancel + speak seguidos derrubam o áudio no Android);
+   - a voz em português é escolhida quando a lista de vozes termina de carregar;
+   - a fala começa dentro do toque do usuário. */
+const tts = ('speechSynthesis' in window) ? window.speechSynthesis : null;
 const limpar = t => t.replace(/[\p{Extended_Pictographic}\uFE0F\u200D◐]/gu, '').replace(/\s+/g, ' ').trim();
-function falar(texto) {
-  if (!est.som || !('speechSynthesis' in window)) return;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(limpar(texto));
-  u.lang = 'pt-BR'; 
-  u.rate = 0.9;
+let voz = null, sessao = 0, avisoT;
 
-  //  Escolhe SOMENTE vozes femininas em português
-  const vozes = speechSynthesis.getVoices();
-  let v = vozes.find(voz => 
-    voz.lang.toLowerCase().startsWith('pt') && 
-    (voz.name.includes('Feminina') || 
-     voz.name.includes('Feminine') || 
-     voz.name.includes('Google pt-BR') ||
-     voz.name.includes('Maria') ||
-     voz.name.includes('Luciana') ||
-     voz.name.includes('Carmen'))
-  );
-  // Se não achar voz feminina explícita, usa qualquer pt-BR
-  if (!v) {
-    v = vozes.find(voz => voz.lang.toLowerCase().startsWith('pt-br'));
-  }
-  if (v) u.voice = v;
-
-  $('#guia').classList.add('falando');
-  u.onend = u.onerror = () => { 
-    $$('.ouvir').forEach(b => b.setAttribute('aria-pressed', 'false')); 
-    $('#guia').classList.remove('falando'); 
-  };
-  speechSynthesis.speak(u);
+function escolherVoz() {
+  if (!tts) return;
+  const vozes = tts.getVoices() || [];
+  const pt = vozes.filter(v => (v.lang || '').toLowerCase().replace('_', '-').startsWith('pt'));
+  const ptbr = pt.filter(v => (v.lang || '').toLowerCase().replace('_', '-') === 'pt-br');
+  const femininas = /(feminin|female|maria|francisca|luciana|fernanda|camila|vit[oó]ria|google portugu[eê]s do brasil|google pt-br)/i;
+  voz = ptbr.find(v => femininas.test(v.name)) || ptbr[0] || pt.find(v => femininas.test(v.name)) || pt[0] || null;
 }
-const parar = () => { if ('speechSynthesis' in window) speechSynthesis.cancel(); $$('.ouvir').forEach(b => b.setAttribute('aria-pressed', 'false')); $('#guia').classList.remove('falando'); };
+if (tts) {
+  escolherVoz();
+  if (typeof tts.addEventListener === 'function') tts.addEventListener('voiceschanged', escolherVoz);
+  else tts.onvoiceschanged = escolherVoz;
+}
+
+function dividir(texto) {
+  const frases = texto.match(/[^.!?…:]+[.!?…:]*/g) || [texto];
+  const saida = []; let atual = '';
+  frases.forEach(f => {
+    f = f.trim(); if (!f) return;
+    while (f.length > 170) {
+      let corte = f.lastIndexOf(' ', 170); if (corte < 60) corte = 170;
+      if (atual) { saida.push(atual); atual = ''; }
+      saida.push(f.slice(0, corte).trim()); f = f.slice(corte).trim();
+    }
+    if ((atual + ' ' + f).length > 170) { if (atual) saida.push(atual); atual = f; }
+    else atual = atual ? atual + ' ' + f : f;
+  });
+  if (atual) saida.push(atual);
+  return saida;
+}
+
+function fimDaLeitura() {
+  $$('.ouvir').forEach(b => b.setAttribute('aria-pressed', 'false'));
+  $('#guia').classList.remove('falando');
+}
+function parar() {
+  sessao++; clearTimeout(avisoT);
+  if (tts) tts.cancel();
+  fimDaLeitura();
+}
+
+function falar(texto) {
+  if (!est.som) return;
+  if (!tts) { aviso('Este navegador não consegue ler em voz alta.'); return; }
+  sessao++; const minha = sessao; clearTimeout(avisoT);
+  if (tts.speaking || tts.pending || tts.paused) tts.cancel();
+  if (!voz) escolherVoz();
+  const trechos = dividir(limpar(texto));
+  let i = 0, iniciou = false;
+  $('#guia').classList.add('falando');
+
+  function proximo() {
+    if (minha !== sessao) return;
+    if (i >= trechos.length) { fimDaLeitura(); return; }
+    const u = new SpeechSynthesisUtterance(trechos[i]);
+    u.lang = 'pt-BR'; u.rate = 0.9; u.pitch = 1; u.volume = 1;
+    if (voz) u.voice = voz;
+    u.onstart = () => { iniciou = true; clearTimeout(avisoT); };
+    u.onend = () => { if (minha !== sessao) return; i++; proximo(); };
+    u.onerror = ev => {
+      if (minha !== sessao) return;
+      if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) return;
+      fimDaLeitura(); aviso('Não foi possível tocar o áudio neste aparelho.', 4500);
+    };
+    tts.speak(u);
+  }
+  if (tts.paused) tts.resume();
+  proximo();
+  avisoT = setTimeout(() => {
+    if (minha === sessao && !iniciou) aviso('Sem som? Aumente o volume de mídia e desligue o modo silencioso.', 5000);
+  }, 3000);
+}
 
 let tt;
-function aviso(txt) {
+function aviso(txt, ms) {
   const t = $('#toast'); t.textContent = txt; t.classList.add('on');
-  clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 2600);
+  clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), ms || 2600);
 }
 
-//preferencias de acessibilidade
+/* ---------- preferências de acessibilidade ---------- */
 function aplicar() {
   document.documentElement.style.setProperty('--tam', TAMS[est.tam] + '%');
   document.body.classList.toggle('sem-anim', !est.anim);
@@ -334,34 +443,43 @@ $('#btnSom').onclick = () => {
   if (est.som) { tom([659, 784]); falar('Som ligado.'); aviso('Som ligado'); }
   else { parar(); aviso('Som desligado'); }
 };
-$('#btnAnim').onclick = () => {
-  est.anim = !est.anim; aplicar(); salvar(); tom([587]);
-  aviso(est.anim ? 'Animações ligadas' : 'Animações desligadas');
-};
+$('#btnAnim').onclick = () => { est.anim = !est.anim; aplicar(); salvar(); tom([587]); aviso(est.anim ? 'Animações ligadas' : 'Animações desligadas'); };
 $('#btnContraste').onclick = () => { est.contraste = !est.contraste; aplicar(); salvar(); tom([523]); aviso(est.contraste ? 'Alto contraste ligado' : 'Alto contraste desligado'); };
 $('#btnMais').onclick = () => { est.tam = Math.min(est.tam + 1, TAMS.length - 1); aplicar(); salvar(); tom([523]); };
 $('#btnMenos').onclick = () => { est.tam = Math.max(est.tam - 1, 0); aplicar(); salvar(); tom([440]); };
+$('#btnParar').onclick = () => { parar(); aviso('Leitura parada'); };
 
-//leitura em voz alta
+/* abrir e fechar o painel */
+const fab = $('#accFab'), painel = $('#accPainel');
+function painelAbrir(abrir) {
+  painel.hidden = !abrir;
+  fab.setAttribute('aria-expanded', String(abrir));
+}
+fab.onclick = () => painelAbrir(painel.hidden);
+document.addEventListener('click', e => { if (!$('#acc').contains(e.target)) painelAbrir(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !painel.hidden) { painelAbrir(false); fab.focus(); } });
+
+/* ---------- botões Ouvir ---------- */
 function lerSecao(sec, btn) {
   if (!est.som) { aviso('Ligue o som para ouvir a leitura'); return; }
   if (btn.getAttribute('aria-pressed') === 'true') { parar(); return; }
   parar(); btn.setAttribute('aria-pressed', 'true');
-  const partes = [...sec.querySelectorAll('h2, p, li, .conteudo, .atividade')].map(e => e.textContent);
+  const partes = [...sec.querySelectorAll('h2, p, li, .conteudo, .atividade .nome')].map(e => e.textContent);
   tom([523, 659]); falar(partes.join('. '));
 }
 $$('.ouvir').forEach(b => b.onclick = () => lerSecao(b.closest('.secao'), b));
 function boasVindas() {
   if (!est.som) { aviso('Ligue o som para ouvir a professora'); return; }
+  parar();
   tom([523, 659, 784]);
   falar('Oi, pessoal! Eu sou a professora Deise. ' + $('#falaGuia').textContent);
 }
 $('#btnBoasVindas').onclick = $('#btnGuia').onclick = boasVindas;
 
-//atividade indisponiveis
+/* ---------- atividades que ainda não existem ---------- */
 const dlg = $('#aviso');
 $$('.atividade').forEach(b => b.onclick = () => {
-  const nome = limpar(b.textContent);
+  const nome = limpar(b.querySelector('.nome').textContent);
   tom([523, 659, 784]);
   $('#avisoTitulo').textContent = nome + ': disponível em breve!';
   if (dlg.showModal) dlg.showModal(); else alert(nome + ': disponível em breve!');
@@ -370,18 +488,23 @@ $$('.atividade').forEach(b => b.onclick = () => {
 $('#fechar').onclick = () => dlg.close();
 dlg.addEventListener('close', parar);
 
-//animacao de entrada das secoes 
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('visivel'); io.unobserve(e.target); }
-}), { threshold: 0.12 });
-$$('.secao').forEach(s => io.observe(s));
-
-// garante que as vozes sejam carregadas antes de usar
-if ('speechSynthesis' in window) {
-  speechSynthesis.onvoiceschanged = () => {};
+/* ---------- destaca no menu a seção que está na tela ---------- */
+const chips = {};
+$$('nav.menu a').forEach(a => { chips[a.getAttribute('href').slice(1)] = a; });
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && chips[e.target.id]) {
+      Object.values(chips).forEach(c => c.classList.remove('ativo'));
+      const c = chips[e.target.id]; c.classList.add('ativo');
+      const lista = c.closest('ul');
+      lista.scrollTo({ left: c.offsetLeft - (lista.clientWidth - c.offsetWidth) / 2, behavior: est.anim ? 'smooth' : 'auto' });
+    }
+  }), { rootMargin: '-40% 0px -55% 0px' });
+  $$('main .secao').forEach(s => io.observe(s));
 }
 
-aplicar();
+window.addEventListener('beforeunload', () => { if (tts) tts.cancel(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) parar(); });
 
 aplicar();
 </script>
