@@ -13,7 +13,7 @@
 <style>
 :root{
   --ink:#1d2742; --bg:#f3f6fb; --card:#fff; --linha:#d9e1ee; --suave:#4f5b78;
-  --azul:#2a64c0; --verde:#1b7f53; --vermelho:#c0262d; --preto:#1a1a1a; --laranja:#a85400; --vinho:#9c2a6e; --amarelo:#ffc933; --laranjaforte:#c25e00;
+  --azul:#2a64c0; --verde:#1b7f53; --vermelho:#c0262d; --preto:#1a1a1a; --laranja:#ff850cf0; --vinho:#9c2a6e; --amarelo:#ffc933; --marrom:#733903ca;
   --tam:100%;
   --fonte-titulo:'Fredoka','Atkinson Hyperlegible',Verdana,sans-serif;
   --fonte-texto:'Atkinson Hyperlegible',Verdana,Arial,sans-serif;
@@ -22,7 +22,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-size:var(--tam);scroll-behavior:smooth;scroll-padding-top:5.2rem;-webkit-text-size-adjust:100%}
 body{font-family:var(--fonte-texto);background:var(--bg);color:var(--ink);line-height:1.7;font-size:1.0625rem;overflow-x:hidden}
-h1,h2,h3{font-family:var(--fonte-titulo);font-weight:600;line-height:1.2}
+h1,h2,h3,h4{font-family:var(--fonte-titulo);font-weight:600;line-height:1.2}
 button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
 img{max-width:100%;height:auto}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 6px var(--amarelo)}
@@ -75,7 +75,7 @@ main{max-width:1000px;margin:0 auto;padding:1.8rem 1.1rem 2.5rem}
 .atividade{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;min-height:5.2rem;background:var(--cor);color:#fff;border:0;border-radius:1rem;padding:1.15rem 1rem;font-size:1.15rem;font-weight:700;line-height:1.3;box-shadow:0 5px 0 rgba(0,0,0,.28);transition:transform .15s,box-shadow .15s}
 .atividade:hover{transform:translateY(-3px);box-shadow:0 8px 0 rgba(0,0,0,.28)}
 .atividade:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.28)}
-.atividade .breve{font-size:.78rem;font-weight:700;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:.05rem .7rem}
+.atividade .tag{font-size:.78rem;font-weight:700;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:.05rem .7rem}
 .conteudo{background:#eef3fa;border-radius:.9rem;padding:1.1rem 1.2rem;margin-top:1.1rem;border:1px dashed var(--linha)}
 .secao ul{padding-left:1.3rem}
 .secao li{margin-bottom:.5rem}
@@ -113,14 +113,119 @@ footer .linha{max-width:46ch;margin:0 auto}
 .tam .ferr{justify-content:center;text-align:center}
 .tam output{min-width:3.6rem;text-align:center;font-weight:700}
 
-/* aviso em janela */
-dialog{border:0;border-radius:1.3rem;padding:2rem 1.6rem;max-width:26rem;width:calc(100% - 2rem);margin:auto;text-align:center;color:var(--ink)}
-dialog::backdrop{background:rgba(29,39,66,.65)}
-dialog h3{font-size:1.5rem;margin:.5rem 0}
-dialog .ico{font-size:2.6rem}
-dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#fff;border:0;border-radius:999px;padding:.8rem 2.2rem;font-weight:700;font-size:1.05rem}
-.toast{position:fixed;left:50%;bottom:calc(5.8rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);width:max-content;max-width:calc(100vw - 2rem);background:var(--ink);color:#fff;padding:.75rem 1.2rem;border-radius:1rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:250;font-weight:700;text-align:center;line-height:1.4}
+.toast{position:fixed;left:50%;bottom:calc(5.8rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);width:max-content;max-width:calc(100vw - 2rem);background:var(--ink);color:#fff;padding:.75rem 1.2rem;border-radius:1rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:1000;font-weight:700;text-align:center;line-height:1.4}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ================= JANELA DA MATÉRIA + JOGOS ================= */
+dialog{border:0;border-radius:1.3rem;color:var(--ink);background:#fff}
+dialog::backdrop{background:rgba(29,39,66,.65)}
+dialog.licao{--cor:var(--azul);width:min(42rem,calc(100% - 1.4rem));max-height:calc(100vh - 1.4rem);max-height:calc(100dvh - 1.4rem);margin:auto;padding:0;text-align:left;border:4px solid var(--cor);overflow:hidden}
+dialog.licao[open]{display:flex;flex-direction:column}
+.lic-topo{display:flex;align-items:center;justify-content:space-between;gap:.8rem;background:var(--cor);color:#fff;padding:.8rem 1rem}
+.lic-topo h3{font-size:clamp(1.1rem,4vw,1.5rem)}
+.lic-topo button{flex:none;min-height:2.9rem;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:.4rem 1rem;font-weight:700}
+.lic-corpo{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.2rem 1.2rem 1.6rem}
+
+.materia h4{color:var(--cor);font-size:1.35rem;margin:1.1rem 0 .45rem}
+.materia h4:first-child{margin-top:0}
+.materia p{margin-bottom:.8rem;font-size:1.12rem}
+.materia ul{padding-left:1.3rem;margin-bottom:.8rem}
+.materia li{margin-bottom:.45rem;font-size:1.1rem}
+.ex{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr));gap:.7rem;margin:.9rem 0}
+.ex-i{display:flex;flex-direction:column;align-items:center;gap:.2rem;background:#eef3fa;border:2px solid var(--linha);border-radius:1rem;padding:.7rem .4rem;text-align:center}
+.ex-e{font-size:2.6rem;line-height:1.2}
+.ex-t{font:600 1.1rem var(--fonte-titulo)}
+.ex-t b{color:var(--cor);font-size:1.45em}
+.dica{background:#fff7d6;border:2px solid var(--amarelo);color:#1d2742;border-radius:1rem;padding:.8rem 1rem;margin:1rem 0}
+.abc{display:grid;grid-template-columns:repeat(auto-fill,minmax(3.2rem,1fr));gap:.4rem;margin:.8rem 0}
+.abc span{background:#eef3fa;border:2px solid var(--linha);border-radius:.6rem;text-align:center;padding:.2rem 0;font:600 1.25rem var(--fonte-titulo)}
+.abc .vog{background:var(--cor);color:#fff;border-color:var(--cor)}
+.numg{display:grid;gap:.4rem;margin:.8rem 0}
+.num-lin{display:flex;align-items:center;gap:.7rem;background:#eef3fa;border-radius:.7rem;padding:.3rem .7rem}
+.num-lin b{min-width:2rem;font:600 1.5rem var(--fonte-titulo);color:var(--cor)}
+.num-lin span{font-size:1.2rem;line-height:1.4;word-break:break-all}
+.conta{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.6rem;background:#eef3fa;border-radius:1rem;padding:.8rem;margin:.6rem 0 1rem;font-size:1.8rem}
+.conta b{font:600 2rem var(--fonte-titulo);color:var(--cor)}
+.conta .rot{font-size:1.1rem;font-weight:700}
+
+/* alfabeto com som */
+.abcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(4.6rem,1fr));gap:.5rem;margin:.8rem 0}
+.lb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;min-height:4.6rem;background:#eef3fa;border:2px solid var(--cor);border-radius:.8rem;padding:.3rem 0;color:var(--ink);font:600 1.35rem var(--fonte-titulo);line-height:1.2}
+.lb .emo{font-size:1.25rem}
+.lb:active{background:var(--cor);color:#fff}
+/* quadro de 1 a 100 */
+.g100{display:grid;grid-template-columns:repeat(10,1fr);gap:.2rem;margin:.8rem 0}
+.g100 span{background:#eef3fa;border:1px solid var(--linha);border-radius:.3rem;text-align:center;padding:.25rem 0;font:600 .85rem var(--fonte-titulo)}
+.g100 .dz{background:var(--cor);color:#fff;border-color:var(--cor)}
+/* historinhas e bilhete */
+.cena{display:grid;gap:.7rem;margin:.9rem 0}
+.cena-i{display:flex;align-items:center;gap:.9rem;background:#eef3fa;border:2px solid var(--linha);border-radius:1rem;padding:.6rem .9rem}
+.cena-i .ex-e{font-size:2.8rem;flex:none}
+.cena-i p{margin:0!important;font-size:1.15rem!important;font-weight:700}
+.bilhete{background:#fff7d6;border:2px dashed var(--amarelo);color:#1d2742;border-radius:.8rem;padding:1rem 1.2rem;margin:.9rem 0;font-size:1.15rem;text-align:left;line-height:1.5;font-family:var(--fonte-texto)}
+.bilhete p{margin:0 0 .4rem!important;font-size:1.15rem!important}
+.bilhete .ass{text-align:right}
+.bilhete .dt{font-size:.95rem!important;color:#4f5b78}
+
+.lic-acoes{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1.2rem}
+.gb{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:3.2rem;padding:.6rem 1.4rem;background:var(--cor);color:#fff;border:3px solid var(--cor);border-radius:999px;font-weight:700;font-size:1.05rem;box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .12s}
+.gb:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.gb.sec{background:#fff;color:var(--cor);box-shadow:none}
+.gb.sec[aria-pressed="true"]{background:var(--cor);color:#fff}
+.gb.peq{min-height:2.7rem;font-size:.95rem;padding:.35rem 1rem}
+.gb.grande{min-height:3.7rem;font-size:1.2rem;padding:.7rem 1.8rem}
+
+.jt{color:var(--cor);font-size:1.4rem;margin-bottom:.3rem}
+.jd{margin-bottom:.9rem;color:var(--suave)}
+.jogos{display:grid;gap:.8rem;margin-top:.8rem}
+.jogo-op{display:flex;align-items:center;gap:.9rem;text-align:left;min-height:4.6rem;border:3px solid var(--cor);background:#fff;color:var(--ink);border-radius:1rem;padding:.8rem 1rem;font-weight:700;font-size:1.1rem;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.jogo-op .je{font-size:2.2rem;line-height:1}
+.jogo-op small{display:block;font-weight:400;font-size:.92rem;color:var(--suave);line-height:1.4}
+.nav-j{margin-bottom:.8rem}
+.prog{font-weight:700;color:var(--suave);margin-bottom:.5rem}
+.prompt{display:flex;flex-direction:column;align-items:center;gap:.4rem;text-align:center;padding:1rem;margin-bottom:.8rem;background:#eef3fa;border:2px dashed var(--linha);border-radius:1rem}
+.grande-emoji{font-size:4.5rem;line-height:1.15}
+.palavra{font:600 1.8rem var(--fonte-titulo);letter-spacing:.08em}
+.perg{font-weight:700;font-size:1.2rem}
+.grupo{font-size:2rem;line-height:1.35;word-break:break-all}
+.opc .grupo{font-size:1.5rem}
+.op{font:600 2.2rem var(--fonte-titulo);color:var(--cor)}
+.frase{font:600 1.6rem var(--fonte-titulo);line-height:1.4}
+.lacuna{color:var(--cor);border-bottom:4px solid var(--cor);padding:0 .6rem}
+.letrao{font:600 4.5rem var(--fonte-titulo);line-height:1.1}
+.letrao.medio{font-size:3rem}
+.opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.7rem;margin:.9rem 0}
+.opc{min-height:3.8rem;font-size:1.25rem;font-weight:700;line-height:1.3;border:3px solid var(--cor);background:#fff;color:var(--ink);border-radius:1rem;padding:.6rem .8rem;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.opc:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+.opc:disabled{cursor:default}
+.opc:disabled:not(.certo){opacity:.45}
+.opc.certo{background:#1b7f53!important;color:#fff!important;border-color:#1b7f53!important}
+.opc.errado{animation:treme .35s}
+@keyframes treme{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.feed{min-height:1.8rem;text-align:center;font-weight:700;font-size:1.15rem}
+.prox{display:flex;justify-content:center;margin-top:.5rem}
+.sil .opc{font-size:1.5rem}
+.slots{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:.6rem 0 1rem}
+.slot{min-width:3.8rem;min-height:3.8rem;display:grid;place-items:center;padding:0 .6rem;background:#eef3fa;border-bottom:4px solid var(--cor);border-radius:.6rem .6rem 0 0;font:600 1.6rem var(--fonte-titulo)}
+.seq{display:grid;grid-template-columns:repeat(auto-fit,minmax(4.2rem,1fr));gap:.7rem;margin:.9rem 0}
+.seq .opc{font-size:1.9rem;min-height:4.4rem}
+.mem{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.6rem 0}
+@media (min-width:36rem){.mem{grid-template-columns:repeat(4,1fr)}}
+.carta{display:grid;place-items:center;aspect-ratio:1;min-height:4.4rem;padding:.2rem;background:var(--cor);color:#fff;border:3px solid var(--cor);border-radius:.9rem;font:600 1.5rem var(--fonte-titulo);box-shadow:0 4px 0 rgba(0,0,0,.25);overflow:hidden;word-break:break-word;line-height:1.15}
+.carta .verso{display:none;font-size:1.9rem}
+.carta .verso.txt{font-size:1.15rem}
+.carta.virada,.carta.par{background:#fff;color:var(--ink)}
+.carta.virada .frente,.carta.par .frente{display:none}
+.carta.virada .verso,.carta.par .verso{display:block}
+.carta.par{background:#e3f6ec;border-color:#1b7f53}
+.tela{display:block;width:100%;max-width:26rem;aspect-ratio:1;margin:.6rem auto;background:#fff;border:3px solid var(--cor);border-radius:1rem;touch-action:none;cursor:crosshair}
+.paleta{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;align-items:center;margin:.5rem 0}
+.cor{width:2.9rem;height:2.9rem;border-radius:50%;border:3px solid #fff;outline:2px solid #1d2742;font-size:1.2rem;line-height:1;display:grid;place-items:center}
+.cor[aria-pressed="true"]{outline:5px solid var(--cor);transform:scale(1.15)}
+.fim{text-align:center;padding:.5rem 0}
+.estrelas{font-size:3.2rem;line-height:1.3}
+.fim h4{color:var(--cor);font-size:1.8rem;margin:.3rem 0}
+.fim p{font-size:1.15rem}
 
 /* sem animações */
 .sem-anim *,.sem-anim *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -130,8 +235,8 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
 .contraste .secao{border:3px solid #fff;border-top-width:8px;box-shadow:none}
 .contraste .cab h2,.contraste .ouvir{color:#ffe600;border-color:#ffe600}
 .contraste .ouvir:hover,.contraste .ouvir[aria-pressed="true"]{background:#ffe600;color:#000}
-.contraste .atividade,.contraste .btn-hero,.contraste dialog button{background:#ffe600;color:#000}
-.contraste .atividade .breve{background:#000;color:#ffe600;border-color:#000}
+.contraste .atividade,.contraste .btn-hero{background:#ffe600;color:#000}
+.contraste .atividade .tag{background:#000;color:#ffe600;border-color:#000}
 .contraste header.topo{background:#000;border-bottom:3px solid #fff;border-radius:0}
 .contraste nav.menu{background:#000;border-bottom:3px solid #fff}
 .contraste nav.menu a{color:#ffe600;border-color:#ffe600;background:transparent}
@@ -147,6 +252,21 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
 .contraste footer{background:#000;border-top:3px solid #fff;border-radius:0}
 .contraste .toast{background:#ffe600;color:#000}
 .contraste :focus-visible{outline-color:#ffe600;box-shadow:0 0 0 6px #000}
+.contraste dialog.licao{--cor:#ffe600}
+.contraste .lic-topo{background:#ffe600;color:#000}
+.contraste .lic-topo button{background:#000;color:#ffe600}
+.contraste .gb{background:#ffe600;color:#000;border-color:#ffe600}
+.contraste .gb.sec{background:#000;color:#ffe600}
+.contraste .gb.sec[aria-pressed="true"]{background:#ffe600;color:#000}
+.contraste .jogo-op,.contraste .opc{background:#000;color:#fff;border-color:#fff}
+.contraste .opc.certo{background:#1b7f53!important;color:#fff!important;border-color:#fff!important}
+.contraste .ex-i,.contraste .prompt,.contraste .slot,.contraste .abc span,.contraste .num-lin,.contraste .conta,.contraste .lb,.contraste .g100 span,.contraste .cena-i{background:#111;border-color:#fff;color:#fff}
+.contraste .lb{border-color:#ffe600}
+.contraste .abc .vog,.contraste .g100 .dz{background:#ffe600;color:#000}
+.contraste .dica,.contraste .bilhete{background:#111;border-color:#ffe600;color:#fff}
+.contraste .carta{background:#ffe600;color:#000;border-color:#fff}
+.contraste .carta.virada,.contraste .carta.par{background:#fff;color:#000}
+.contraste .tela{border-color:#fff}
 
 /* ---------- celular ---------- */
 @media (max-width:36rem){
@@ -166,7 +286,11 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
   .balao::before{top:-15px;border-bottom-color:var(--bb)}
   .balao::after{top:-10px;border-bottom-color:var(--bf)}
   .acc-painel{position:fixed;left:.7rem;right:.7rem;bottom:calc(5.2rem + env(safe-area-inset-bottom,0px));width:auto}
-  dialog{margin:auto auto 1rem;border-radius:1.3rem}
+  dialog.licao{width:calc(100% - .8rem);max-height:calc(100dvh - .8rem)}
+  .lic-corpo{padding:1rem .9rem 1.4rem}
+  .grande-emoji{font-size:4rem}
+  .lic-acoes .gb{flex:1 1 100%}
+  .g100 span{font-size:.75rem}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -187,13 +311,12 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
 <nav class="menu" aria-label="Disciplinas">
   <ul>
     <li><a href="#boas-vindas" style="--cor:var(--azul)">Início</a></li>
-    <li><a href="#alfabetizacao" style="--cor:var(--azul)">Alfabetização</a></li>
+    <li><a href="#portugues" style="--cor:var(--azul)">Português</a></li>
     <li><a href="#matematica" style="--cor:var(--vermelho)">Matemática</a></li>
     <li><a href="#ciencias" style="--cor:var(--verde)">Ciências</a></li>
-    <li><a href="#geografia" style="--cor:var(--preto)">Geografia</a></li>
-    <li><a href="#historia" style="--cor:var(--laranja)">História</a></li>
+    <li><a href="#historia-geografia" style="--cor:var(--laranja)">História/Geografia</a></li>
     <li><a href="#arte" style="--cor:var(--vinho)">Arte</a></li>
-    <li><a href="#livros" style="--cor:var(--laranjaforte)">Livros</a></li>
+    <li><a href="#livros" style="--cor:var(--marrom)">Livros</a></li>
     <li><a href="#familias" style="--cor:var(--ink)">Para as famílias</a></li>
   </ul>
 </nav>
@@ -213,49 +336,67 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
   </div>
 </section>
 
-<section class="secao" id="alfabetizacao" style="--cor:var(--azul)" aria-labelledby="t-alf">
-  <div class="cab"><h2 id="t-alf">🔤 Alfabetização</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <p>Escolha uma atividade:</p>
+<section class="secao" id="portugues" style="--cor:var(--azul)" aria-labelledby="t-por">
+  <div class="cab"><h2 id="t-por">🔤 Português</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
+  <p>Escolha um assunto. Primeiro você lê a explicação e depois pode jogar:</p>
   <div class="grade">
-    <button class="atividade"><span class="nome">🖼️ Letra Inicial</span><span class="breve">Em breve</span></button>
-    <button class="atividade"><span class="nome">🧩 Juntar Sílabas</span><span class="breve">Em breve</span></button>
-    <button class="atividade"><span class="nome">📝 Escrever Letras</span><span class="breve">Em breve</span></button>
-    <button class="atividade"><span class="nome">🃏 Memória de Letras</span><span class="breve">Em breve</span></button>
+    <button class="atividade" data-id="alfabeto"><span class="nome">🔤 Alfabeto: leitura e som das letras</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="silabas-simples"><span class="nome">🧩 Palavras com sílabas simples</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="divisao-silabica"><span class="nome">👏 Divisão silábica</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="frases"><span class="nome">💬 Frases</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="textos"><span class="nome">🖼️ Pequenos textos</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="bilhete"><span class="nome">💌 Bilhete</span><span class="tag">Aprender e jogar 🎮</span></button>
   </div>
-  <div class="conteudo"><strong>📖 Conteúdo:</strong> Aqui a professora vai colocar as letras que vamos estudar.</div>
 </section>
 
 <section class="secao" id="matematica" style="--cor:var(--vermelho)" aria-labelledby="t-mat">
   <div class="cab"><h2 id="t-mat">🔢 Matemática</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
+  <p>Escolha um assunto. Primeiro você lê a explicação e depois pode jogar:</p>
   <div class="grade">
-    <button class="atividade"><span class="nome">🔢 Contar Números</span><span class="breve">Em breve</span></button>
-    <button class="atividade"><span class="nome">➕ Mais e Menos</span><span class="breve">Em breve</span></button>
+    <button class="atividade" data-id="hist-numeros"><span class="nome">📜 História dos números</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="numeros-100"><span class="nome">💯 Números até 100</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="ordem"><span class="nome">📈 Ordem crescente e decrescente</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="unidade"><span class="nome">1️⃣ Unidade</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="dezena"><span class="nome">🔟 Dezenas</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="adicao"><span class="nome">➕ Adição simples</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="subtracao"><span class="nome">➖ Subtração simples</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="par-impar"><span class="nome">👯 Par e ímpar</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="dinheiro"><span class="nome">💰 Sistema monetário</span><span class="tag">Aprender e jogar 🎮</span></button>
   </div>
 </section>
 
 <section class="secao" id="ciencias" style="--cor:var(--verde)" aria-labelledby="t-cie">
   <div class="cab"><h2 id="t-cie">🧪 Ciências</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade"><span class="nome">♻️ Reutilização do lixo</span><span class="breve">Em breve</span></button></div>
+  <p>Escolha um assunto. Primeiro você lê a explicação e depois pode jogar:</p>
+  <div class="grade">
+    <button class="atividade" data-id="alimentacao"><span class="nome">🥕 Alimentação saudável</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="lixo"><span class="nome">♻️ Lixo e reciclagem</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="plantas"><span class="nome">🌱 Plantas</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="animais-habitat"><span class="nome">🐟 Animais aquáticos e terrestres</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="animais-grupos"><span class="nome">🐸 Mamíferos, aves e anfíbios</span><span class="tag">Aprender e jogar 🎮</span></button>
+  </div>
 </section>
 
-<section class="secao" id="geografia" style="--cor:var(--preto)" aria-labelledby="t-geo">
-  <div class="cab"><h2 id="t-geo">🌍 Geografia</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade"><span class="nome">📘 Matéria</span><span class="breve">Em breve</span></button></div>
-</section>
-
-<section class="secao" id="historia" style="--cor:var(--laranja)" aria-labelledby="t-his">
-  <div class="cab"><h2 id="t-his">🕰️ História</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade"><span class="nome">📘 Matéria</span><span class="breve">Em breve</span></button></div>
+<section class="secao" id="historia-geografia" style="--cor:var(--laranja)" aria-labelledby="t-his">
+  <div class="cab"><h2 id="t-his">🕰️ História/Geografia</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
+  <p>Escolha um assunto. Primeiro você lê a explicação e depois pode jogar:</p>
+  <div class="grade">
+    <button class="atividade" data-id="identidade"><span class="nome">🪪 Identidade</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="familia"><span class="nome">👨‍👩‍👧 Família</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="convivencia"><span class="nome">🤝 Convivência</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="transportes"><span class="nome">🚌 Meios de transporte</span><span class="tag">Aprender e jogar 🎮</span></button>
+    <button class="atividade" data-id="comunicacao"><span class="nome">📻 Meios de comunicação</span><span class="tag">Aprender e jogar 🎮</span></button>
+  </div>
 </section>
 
 <section class="secao" id="arte" style="--cor:var(--vinho)" aria-labelledby="t-art">
   <div class="cab"><h2 id="t-art">🎨 Arte</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade"><span class="nome">📘 Matéria</span><span class="breve">Em breve</span></button></div>
+  <div class="grade"><button class="atividade" data-id="arte"><span class="nome">🖌️ Cores e formas</span><span class="tag">Aprender e jogar 🎮</span></button></div>
 </section>
 
-<section class="secao" id="livros" style="--cor:var(--laranjaforte)" aria-labelledby="t-liv">
+<section class="secao" id="livros" style="--cor:var(--marrom)" aria-labelledby="t-liv">
   <div class="cab"><h2 id="t-liv">📖 Livros</h2><button class="ouvir" aria-pressed="false">🔊 Ouvir</button></div>
-  <div class="grade"><button class="atividade"><span class="nome">📚 Venha aumentar mais ainda sua Habilidade com Leitura</span><span class="breve">Em breve</span></button></div>
+  <div class="grade"><button class="atividade" data-id="livros"><span class="nome">📚 Venha aumentar mais ainda sua Habilidade com Leitura</span><span class="tag">Aprender e jogar 🎮</span></button></div>
 </section>
 
 <section class="secao" id="familias" style="--cor:var(--ink)" aria-labelledby="t-fam">
@@ -264,6 +405,7 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
     <li>Botões grandes, fáceis de tocar com o dedo.</li>
     <li>Cores calmas, que não cansam os olhos.</li>
     <li>Leitura em voz alta de cada seção, com o botão Ouvir.</li>
+    <li>Cada atividade tem uma explicação da matéria (que também pode ser ouvida) e joguinhos para a criança praticar brincando.</li>
     <li>Tamanho da letra ajustável e modo de alto contraste.</li>
     <li>Navegação completa pelo teclado e compatível com leitores de tela.</li>
     <li>Som e animações podem ser desligados no botão Acessibilidade, no canto da tela.</li>
@@ -275,7 +417,7 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
 
 <footer>
   <div class="linha">
-    💙 Feito com carinho para todos os alunos do 1º Ano<br>
+    💙 Feito com carinho para todos os alunos do 1º Ano da Tia Deise<br>
     Por: Hugo Raphael de Miranda - Técnico em Informática pelo Instituto Federal de Minas Gerais (IFMG) - Campus Sabará
   </div>
 </footer>
@@ -299,11 +441,13 @@ dialog button{margin-top:1.2rem;min-height:3.2rem;background:var(--azul);color:#
   <button class="acc-fab" id="accFab" aria-expanded="false" aria-controls="accPainel"><span class="ico" aria-hidden="true">♿</span><span>Acessibilidade</span></button>
 </div>
 
-<dialog id="aviso" aria-labelledby="avisoTitulo">
-  <div class="ico" aria-hidden="true">🔒</div>
-  <h3 id="avisoTitulo">Disponível em breve!</h3>
-  <p id="avisoTexto">Estamos preparando tudo com muito carinho para vocês.</p>
-  <button id="fechar">Entendi</button>
+<!-- Janela da matéria e dos joguinhos -->
+<dialog id="licao" class="licao" aria-labelledby="licTitulo">
+  <div class="lic-topo">
+    <h3 id="licTitulo">Atividade</h3>
+    <button id="licFechar" aria-label="Fechar a janela">✖ Fechar</button>
+  </div>
+  <div class="lic-corpo" id="licCorpo"></div>
 </dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -476,16 +620,1215 @@ function boasVindas() {
 }
 $('#btnBoasVindas').onclick = $('#btnGuia').onclick = boasVindas;
 
-/* ---------- atividades que ainda não existem ---------- */
-const dlg = $('#aviso');
-$$('.atividade').forEach(b => b.onclick = () => {
-  const nome = limpar(b.querySelector('.nome').textContent);
-  tom([523, 659, 784]);
-  $('#avisoTitulo').textContent = nome + ': disponível em breve!';
-  if (dlg.showModal) dlg.showModal(); else alert(nome + ': disponível em breve!');
-  falar(nome + '. Disponível em breve. Estamos preparando tudo com muito carinho para vocês.');
+/* =====================================================================
+   ATIVIDADES: MATÉRIA + JOGUINHOS
+   Para mudar um texto da matéria, procure o nome da atividade lá embaixo
+   em "const ATIV" e edite o texto dentro de "licao".
+   ===================================================================== */
+
+/* ---------- utilidades ---------- */
+const aleat = n => Math.floor(Math.random() * n);
+const embaralhar = a => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = aleat(i + 1); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const sortear = (a, n) => embaralhar(a).slice(0, n);
+const ALFA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const norm = o => (typeof o === 'object' ? o : { t: o });
+function opcoes(certo, errados) {
+  const lista = embaralhar([{ ...norm(certo), ok: true }, ...errados.map(norm)]);
+  return { opts: lista, certa: lista.findIndex(o => o.ok) };
+}
+const NUMS = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+/* dois números "errados" perto do número certo */
+function outrosNum(r, min, max) {
+  const s = new Set(); let t = 0;
+  while (s.size < 2 && t++ < 80) { const x = r + aleat(9) - 4; if (x !== r && x >= min && x <= max) s.add(x); }
+  for (let x = min; s.size < 2 && x <= max; x++) if (x !== r) s.add(x);
+  return [...s].map(String);
+}
+
+/* ---------- blocos para escrever a matéria ---------- */
+const ex = (itens, ini) => `<div class="ex">${itens.map(([e, t]) =>
+  `<div class="ex-i"><span class="ex-e" aria-hidden="true">${e}</span> <span class="ex-t">${ini ? `<b>${t[0]}</b>${t.slice(1)}` : t}</span></div>`).join('')}</div>`;
+const dica = t => `<div class="dica">💡 <strong>Dica:</strong> ${t}</div>`;
+const abcPar = `<div class="abc nao-ler">${ALFA.map(l => `<span>${l}${l.toLowerCase()}</span>`).join('')}</div>`;
+const abcVog = `<div class="abc nao-ler">${ALFA.map(l => `<span class="${'AEIOU'.includes(l) ? 'vog' : ''}">${l}</span>`).join('')}</div>`;
+const conta = (a, op, b, c) => `<div class="conta nao-ler"><span>${a}</span><b>${op}</b><span>${b}</span><b>=</b><span>${c}</span></div>`;
+const linhas = (e, n) => `<div class="numg nao-ler">${NUMS(1, n).map(i => `<div class="num-lin"><b>${i}</b><span>${e.repeat(i)}</span></div>`).join('')}</div>`;
+const cena = itens => `<div class="cena">${itens.map(([e, t]) => `<div class="cena-i"><span class="ex-e" aria-hidden="true">${e}</span><p>${t}</p></div>`).join('')}</div>`;
+const grp = (e, n) => `<span class="grupo" aria-label="${n} figuras">${e.repeat(n)}</span>`;
+
+/* ---------- banco de palavras ---------- */
+const PAL = [
+  ['🐝', 'Abelha', 'A'], ['⚽', 'Bola', 'B'], ['🏠', 'Casa', 'C'], ['🎲', 'Dado', 'D'], ['🐘', 'Elefante', 'E'],
+  ['🔥', 'Fogo', 'F'], ['🐱', 'Gato', 'G'], ['🦛', 'Hipopótamo', 'H'], ['🏝️', 'Ilha', 'I'], ['🐊', 'Jacaré', 'J'],
+  ['🥝', 'Kiwi', 'K'], ['🌙', 'Lua', 'L'], ['🐒', 'Macaco', 'M'], ['☁️', 'Nuvem', 'N'], ['👁️', 'Olho', 'O'],
+  ['🦆', 'Pato', 'P'], ['🧀', 'Queijo', 'Q'], ['🐀', 'Rato', 'R'], ['☀️', 'Sol', 'S'], ['🐢', 'Tartaruga', 'T'],
+  ['🍇', 'Uva', 'U'], ['🐄', 'Vaca', 'V'], ['🧇', 'Waffle', 'W'], ['☕', 'Xícara', 'X'], ['🧘', 'Yoga', 'Y'], ['🦓', 'Zebra', 'Z']
+];
+const SILABAS = [
+  ['🎈', ['BO', 'LA']], ['🐱', ['GA', 'TO']], ['🍌', ['BA', 'NA', 'NA']], ['🦆', ['PA', 'TO']], ['🐄', ['VA', 'CA']],
+  ['🌙', ['LU', 'A']], ['🏠', ['CA', 'SA']], ['🐸', ['SA', 'PO']], ['🐢', ['TAR', 'TA', 'RU', 'GA']],
+  ['🦋', ['BOR', 'BO', 'LE', 'TA']], ['🥁', ['TAM', 'BOR']], ['🍉', ['ME', 'LAN', 'CI', 'A']],
+  ['🎲', ['DA', 'DO']], ['🪆', ['BO', 'NE', 'CA']], ['🥗', ['SA', 'LA', 'DA']], ['🍅', ['TO', 'MA', 'TE']], ['🚪', ['POR', 'TA']]
+];
+const TODAS_SIL = [...new Set(SILABAS.flatMap(s => s[1]))];
+
+/* ---------- motor: perguntas de múltipla escolha ---------- */
+function quiz(gerar) {
+  return (area, again) => {
+    const qs = gerar(); let n = 0, acertos = 0;
+    function mostrar() {
+      const q = qs[n]; let errou = false, acertou = false;
+      area.innerHTML = `<p class="prog">Pergunta ${n + 1} de ${qs.length}</p>
+        <div class="prompt">${q.prompt}</div>
+        <div class="lic-acoes" style="margin-top:0"><button class="gb sec peq" id="qOuvir">🔊 Ouvir a pergunta</button></div>
+        <div class="opcoes">${q.opts.map((o, i) => `<button class="opc" data-i="${i}"${o.cor ? ` style="background:${o.cor};color:${o.tc || '#fff'};border-color:${o.cor}"` : ''}>${o.t}</button>`).join('')}</div>
+        <p class="feed" role="status" aria-live="polite"></p>
+        <div class="prox"></div>`;
+      const feed = area.querySelector('.feed');
+      area.querySelector('#qOuvir').onclick = () => falar(q.fala || '');
+      area.querySelectorAll('.opc').forEach(b => b.onclick = () => {
+        if (acertou) return;
+        if (+b.dataset.i === q.certa) {
+          acertou = true; if (!errou) acertos++;
+          b.classList.add('certo'); tom([659, 784, 988]);
+          feed.textContent = '🌟 Muito bem!';
+          area.querySelectorAll('.opc').forEach(x => x.disabled = true);
+          const prox = area.querySelector('.prox');
+          prox.innerHTML = `<button class="gb grande">${n + 1 < qs.length ? 'Próxima ▶' : 'Ver resultado 🏆'}</button>`;
+          prox.firstChild.onclick = () => { n++; if (n < qs.length) mostrar(); else fim(area, again, acertos, qs.length); };
+          prox.firstChild.focus();
+        } else {
+          errou = true; b.classList.add('errado'); b.disabled = true;
+          tom([262, 196]); feed.textContent = 'Quase! Tente de novo 💪';
+        }
+      });
+      if (q.fala) falar(q.fala);
+    }
+    mostrar();
+  };
+}
+
+/* quiz de perguntas e respostas escritas: [pergunta, certa, [erradas], emoji opcional] */
+const qa = (lista, n = 5) => quiz(() => sortear(lista, Math.min(n, lista.length)).map(([p, certo, errados, e]) => ({
+  prompt: `${e ? `<span class="grande-emoji" aria-hidden="true">${e}</span>` : ''}<span class="perg">${p}</span>`,
+  fala: p, ...opcoes(certo, errados)
+})));
+
+/* ---------- motor: jogo da memória ---------- */
+function memoria(gerar) {
+  return (area, again) => {
+    const pares = gerar();
+    const cartas = embaralhar(pares.flatMap((p, i) => [{ id: i, c: p[0] }, { id: i, c: p[1] }]));
+    let aberta = null, trava = false, achados = 0, jogadas = 0;
+    area.innerHTML = `<p class="prog" id="mInfo" aria-live="polite">Jogadas: 0</p>
+      <div class="mem">${cartas.map((c, i) => `<button class="carta" data-i="${i}" aria-label="Carta virada para baixo"><span class="frente" aria-hidden="true">❓</span><span class="verso${String(c.c).length > 3 && !/\p{Extended_Pictographic}/u.test(c.c) ? ' txt' : ''}">${c.c}</span></button>`).join('')}</div>`;
+    const bts = [...area.querySelectorAll('.carta')];
+    bts.forEach(b => b.onclick = () => {
+      const i = +b.dataset.i;
+      if (trava || b.classList.contains('virada') || b.classList.contains('par')) return;
+      b.classList.add('virada'); b.setAttribute('aria-label', 'Carta: ' + limpar(String(cartas[i].c)));
+      tom([440 + i * 10]);
+      if (aberta === null) { aberta = i; return; }
+      jogadas++; area.querySelector('#mInfo').textContent = 'Jogadas: ' + jogadas;
+      const j = aberta; aberta = null;
+      if (cartas[i].id === cartas[j].id) {
+        [b, bts[j]].forEach(x => { x.classList.remove('virada'); x.classList.add('par'); x.disabled = true; });
+        tom([659, 784]); achados++;
+        if (achados === pares.length) setTimeout(() => fim(area, again, 0, 0, `Você achou todos os pares em ${jogadas} jogadas!`), 700);
+      } else {
+        trava = true;
+        setTimeout(() => {
+          [b, bts[j]].forEach(x => { x.classList.remove('virada'); x.setAttribute('aria-label', 'Carta virada para baixo'); });
+          trava = false;
+        }, 900);
+      }
+    });
+  };
+}
+
+/* ---------- tela final ---------- */
+function fim(area, again, acertos, total, extra) {
+  let e = 3;
+  if (total) { const p = acertos / total; e = p >= .8 ? 3 : p >= .5 ? 2 : 1; }
+  const msg = total ? `Você acertou de primeira ${acertos} de ${total} perguntas!` : (extra || 'Você completou o jogo!');
+  area.innerHTML = `<div class="fim"><div class="estrelas" aria-hidden="true">${'⭐'.repeat(e)}</div><h4>Parabéns!</h4><p>${msg}</p>
+    <div class="lic-acoes"><button class="gb" id="fAgain">🔁 Jogar de novo</button><button class="gb sec" id="fOutros">🎮 Outros jogos</button></div></div>`;
+  tom([523, 659, 784, 1047]); falar('Parabéns! ' + msg);
+  area.querySelector('#fAgain').onclick = again;
+  area.querySelector('#fOutros').onclick = menuJogos;
+  area.querySelector('#fAgain').focus();
+}
+
+/* ---------- motor: montar (tocar nas peças na ordem certa) ----------
+   cada item: { emoji, pecas:[...], sep:'' ou ' ', instr:'texto', fala:'texto' }  */
+function montar(gerar, cfg = {}) {
+  return (area, again) => {
+    const pal = gerar(); let n = 0, acertos = 0;
+    function rodada() {
+      const it = pal[n], sep = it.sep || ''; let errou = false;
+      const ordem = embaralhar(it.pecas.map(s => ({ s })));
+      let pos = [];
+      area.innerHTML = `<p class="prog">${cfg.rotulo || 'Rodada'} ${n + 1} de ${pal.length}</p>
+        <div class="prompt">${it.emoji ? `<span class="grande-emoji" aria-hidden="true">${it.emoji}</span>` : ''}<span class="perg">${it.instr}</span></div>
+        <div class="slots" aria-live="polite">${it.pecas.map(() => '<span class="slot"></span>').join('')}</div>
+        <div class="opcoes sil">${ordem.map((o, i) => `<button class="opc" data-k="${i}">${o.s}</button>`).join('')}</div>
+        <div class="lic-acoes" style="margin-top:0"><button class="gb sec peq" id="jApagar">⌫ Apagar</button></div>
+        <p class="feed" role="status" aria-live="polite"></p><div class="prox"></div>`;
+      const slots = [...area.querySelectorAll('.slot')], bts = [...area.querySelectorAll('.opc')], feed = area.querySelector('.feed');
+      const desenhar = () => slots.forEach((s, i) => s.textContent = pos[i] !== undefined ? ordem[pos[i]].s : '');
+      falar(it.fala || it.instr);
+      bts.forEach((b, i) => b.onclick = () => {
+        if (pos.length >= it.pecas.length || b.disabled) return;
+        pos.push(i); b.disabled = true; tom([523 + pos.length * 60]); desenhar();
+        if (pos.length === it.pecas.length) {
+          const texto = pos.map(p => ordem[p].s).join(sep);
+          if (texto === it.pecas.join(sep)) {
+            if (!errou) acertos++;
+            bts.forEach(x => x.disabled = true);
+            tom([659, 784, 988]); feed.textContent = '🌟 Muito bem! ' + texto;
+            falar(texto.toLowerCase());
+            const prox = area.querySelector('.prox');
+            prox.innerHTML = `<button class="gb grande">${n + 1 < pal.length ? 'Próxima ▶' : 'Ver resultado 🏆'}</button>`;
+            prox.firstChild.onclick = () => { n++; if (n < pal.length) rodada(); else fim(area, again, acertos, pal.length); };
+            prox.firstChild.focus();
+          } else {
+            errou = true; tom([262, 196]); feed.textContent = 'Hmm, tente outra ordem! 💪';
+            setTimeout(() => { pos = []; bts.forEach(x => x.disabled = false); desenhar(); feed.textContent = ''; }, 900);
+          }
+        }
+      });
+      area.querySelector('#jApagar').onclick = () => {
+        if (!pos.length || area.querySelector('.prox').firstChild) return;
+        const u = pos.pop(); bts[u].disabled = false; desenhar(); feed.textContent = '';
+      };
+    }
+    rodada();
+  };
+}
+
+const juntar = montar(() => sortear(SILABAS, 5).map(([e, s]) => ({
+  emoji: e, pecas: s, instr: 'Toque nas sílabas na ordem certa.', fala: 'Que palavra é essa? Junte as sílabas.'
+})), { rotulo: 'Palavra' });
+
+/* ---------- jogo: números em ordem ---------- */
+function sequencia(area, again) {
+  const seqs = [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6, 7, 8], [5, 4, 3, 2, 1]]; let r = 0;
+  function rodada() {
+    const seq = seqs[r]; let idx = 0;
+    const texto = `Toque nos números do ${seq[0]} ao ${seq[seq.length - 1]}, em ordem.`;
+    area.innerHTML = `<p class="prog">Rodada ${r + 1} de ${seqs.length}</p>
+      <div class="prompt"><span class="perg">${texto}</span></div>
+      <div class="seq">${embaralhar(seq).map(x => `<button class="opc" data-n="${x}">${x}</button>`).join('')}</div>
+      <p class="feed" role="status" aria-live="polite"></p>`;
+    const feed = area.querySelector('.feed');
+    falar(texto);
+    area.querySelectorAll('.opc').forEach(b => b.onclick = () => {
+      if (+b.dataset.n === seq[idx]) {
+        b.classList.add('certo'); b.disabled = true; tom([440 + idx * 70]); idx++;
+        if (idx === seq.length) {
+          feed.textContent = '🌟 Muito bem!'; tom([659, 784, 988]);
+          setTimeout(() => { r++; if (r < seqs.length) rodada(); else fim(area, again, 0, 0, 'Você colocou todos os números em ordem!'); }, 900);
+        }
+      } else {
+        b.classList.add('errado'); tom([262, 196]); feed.textContent = 'Quase! Procure o próximo número. 💪';
+        setTimeout(() => b.classList.remove('errado'), 400);
+      }
+    });
+  }
+  rodada();
+}
+
+/* ---------- desenhar com o dedo (traçar letras e pintar) ---------- */
+function riscar(cv, c, estilo) {
+  let d = false, ult = null;
+  const pos = e => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  cv.onpointerdown = e => {
+    e.preventDefault(); d = true; ult = pos(e);
+    try { cv.setPointerCapture(e.pointerId); } catch (x) {}
+    const s = estilo(); c.fillStyle = s.cor; c.beginPath(); c.arc(ult.x, ult.y, s.esp / 2, 0, Math.PI * 2); c.fill();
+  };
+  cv.onpointermove = e => {
+    if (!d) return; e.preventDefault();
+    const p = pos(e), s = estilo();
+    c.strokeStyle = s.cor; c.lineWidth = s.esp; c.lineCap = 'round'; c.lineJoin = 'round';
+    c.beginPath(); c.moveTo(ult.x, ult.y); c.lineTo(p.x, p.y); c.stroke(); ult = p;
+  };
+  cv.onpointerup = cv.onpointercancel = () => { d = false; };
+}
+function prepararTela(cv) {
+  const c = cv.getContext('2d'), dpr = window.devicePixelRatio || 1, W = cv.clientWidth || 300;
+  cv.width = cv.height = Math.round(W * dpr); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { c, W };
+}
+
+function tracar(area, again) {
+  const L = []; ALFA.forEach(l => { L.push(l); L.push(l.toLowerCase()); }); let n = 0;
+  area.innerHTML = `<p class="prog" id="tInfo" aria-live="polite"></p>
+    <canvas class="tela" id="tela" role="img" aria-label="Quadro para cobrir a letra com o dedo"></canvas>
+    <div class="lic-acoes"><button class="gb sec peq" id="tAnt">◀ Anterior</button><button class="gb sec peq" id="tLimpar">🧽 Limpar</button><button class="gb peq" id="tProx">Próxima ▶</button></div>
+    <div class="lic-acoes"><button class="gb" id="tFim">✅ Terminei</button></div>`;
+  const cv = $('#tela'), { c, W } = prepararTela(cv);
+  function guia() {
+    const l = L[n], tipo = l === l.toUpperCase() ? 'maiúscula' : 'minúscula';
+    c.fillStyle = '#fff'; c.fillRect(0, 0, W, W);
+    c.fillStyle = '#c9d4e8'; c.font = `700 ${W * 0.78}px "Atkinson Hyperlegible", Arial, sans-serif`;
+    c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(l, W / 2, W * 0.54);
+    $('#tInfo').textContent = `Cubra a letra ${l} (${tipo}) · ${n + 1} de ${L.length}`;
+    return `Cubra a letra ${l}. Letra ${tipo}.`;
+  }
+  riscar(cv, c, () => ({ cor: '#2a64c0', esp: 14 }));
+  falar(guia());
+  $('#tLimpar').onclick = () => { guia(); tom([392]); };
+  $('#tProx').onclick = () => { n = (n + 1) % L.length; tom([523]); falar(guia()); };
+  $('#tAnt').onclick = () => { n = (n - 1 + L.length) % L.length; tom([440]); falar(guia()); };
+  $('#tFim').onclick = () => fim(area, again, 0, 0, 'Que capricho! Você treinou as letras.');
+}
+
+function pintar(area, again) {
+  const cores = [['Vermelho', '#c0262d'], ['Laranja', '#e8740c'], ['Amarelo', '#ffc933'], ['Verde', '#1b7f53'], ['Azul', '#2a64c0'], ['Roxo', '#6a2fa0'], ['Marrom', '#7a4a21'], ['Preto', '#1a1a1a'], ['Borracha', '#ffffff']];
+  const tams = [['Fino', 6], ['Médio', 14], ['Grosso', 28]];
+  let cor = cores[0][1], esp = 14;
+  area.innerHTML = `<div class="paleta" role="group" aria-label="Cores">${cores.map(([n, h], i) => `<button class="cor" data-c="${h}" style="background:${h}" aria-label="${n}" aria-pressed="${i === 0}">${n === 'Borracha' ? '🧽' : ''}</button>`).join('')}</div>
+    <div class="paleta" role="group" aria-label="Espessura do pincel">${tams.map(([n, v]) => `<button class="gb sec peq" data-e="${v}" aria-pressed="${v === 14}">${n}</button>`).join('')}</div>
+    <canvas class="tela" id="tela" role="img" aria-label="Quadro de desenho livre"></canvas>
+    <div class="lic-acoes"><button class="gb sec" id="pLimpar">🧽 Limpar tudo</button><button class="gb" id="pFim">✅ Terminei</button></div>`;
+  const cv = $('#tela'), { c, W } = prepararTela(cv);
+  const branco = () => { c.fillStyle = '#fff'; c.fillRect(0, 0, W, W); };
+  branco(); riscar(cv, c, () => ({ cor, esp }));
+  area.querySelectorAll('.cor').forEach(b => b.onclick = () => {
+    cor = b.dataset.c; area.querySelectorAll('.cor').forEach(x => x.setAttribute('aria-pressed', x === b)); tom([523]);
+  });
+  area.querySelectorAll('[data-e]').forEach(b => b.onclick = () => {
+    esp = +b.dataset.e; area.querySelectorAll('[data-e]').forEach(x => x.setAttribute('aria-pressed', x === b)); tom([440]);
+  });
+  $('#pLimpar').onclick = () => { branco(); tom([392]); };
+  $('#pFim').onclick = () => fim(area, again, 0, 0, 'Que desenho lindo!');
+}
+
+/* =====================================================================
+   PERGUNTAS DE CADA JOGO
+   ===================================================================== */
+const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+
+/* ---------- Português ---------- */
+const quizLetraInicial = quiz(() => sortear(PAL, 5).map(([e, p, l]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="palavra">${p.toUpperCase()}</span><span class="perg">Com qual letra começa?</span>`,
+  fala: `Com qual letra começa a palavra ${p}?`,
+  ...opcoes(l, sortear(ALFA.filter(x => x !== l), 2))
+})));
+
+const quizOuvirLetra = quiz(() => sortear(ALFA, 6).map(l => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">🔊</span><span class="perg">Escute e toque na letra certa.</span>`,
+  fala: `Toque na letra ${l}.`,
+  ...opcoes(l, sortear(ALFA.filter(x => x !== l), 2))
+})));
+
+const quizMinuscula = quiz(() => sortear(ALFA, 6).map(l => {
+  const paraMin = aleat(2) === 0;
+  const dado = paraMin ? l : l.toLowerCase(), certo = paraMin ? l.toLowerCase() : l;
+  const outros = sortear(ALFA.filter(x => x !== l), 2).map(x => paraMin ? x.toLowerCase() : x);
+  return {
+    prompt: `<span class="letrao">${dado}</span><span class="perg">Qual é a letra ${paraMin ? 'minúscula' : 'maiúscula'} igual a esta?</span>`,
+    fala: `Qual é a letra ${paraMin ? 'minúscula' : 'maiúscula'} igual a letra ${l}?`,
+    ...opcoes(certo, outros)
+  };
+}));
+
+const quizSilabaFalta = quiz(() => sortear(SILABAS, 5).map(([e, sils]) => {
+  const k = aleat(sils.length), certa = sils[k];
+  return {
+    prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="palavra">${sils.map((s, j) => j === k ? '___' : s).join(' · ')}</span><span class="perg">Qual sílaba falta?</span>`,
+    fala: 'Qual sílaba falta para completar a palavra?',
+    ...opcoes(certa, sortear(TODAS_SIL.filter(x => x !== certa), 2))
+  };
+}));
+
+const PALAVRAS = [
+  ['🐱', 'GATO', ['PATO', 'RATO']], ['🦆', 'PATO', ['GATO', 'MATO']], ['🐀', 'RATO', ['GATO', 'PATO']], ['🐄', 'VACA', ['FACA', 'VASO']],
+  ['🌙', 'LUA', ['RUA', 'TUA']], ['🐸', 'SAPO', ['SOPA', 'SAPATO']], ['🏠', 'CASA', ['MESA', 'CAMA']], ['⚽', 'BOLA', ['MOLA', 'BOTA']],
+  ['🎲', 'DADO', ['DEDO', 'DADA']], ['🪆', 'BONECA', ['BOLACHA', 'BOCA']], ['🥗', 'SALADA', ['SALAME', 'SOLADA']]
+];
+const quizPalavra = quiz(() => sortear(PALAVRAS, 5).map(([e, p, errados]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">Que palavra é essa figura?</span>`,
+  fala: 'Qual palavra combina com a figura?', ...opcoes(p, errados)
+})));
+
+const quizQuantasSil = quiz(() => sortear(SILABAS, 6).map(([e, s]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="palavra">${s.join('')}</span><span class="perg">Quantas sílabas tem a palavra? Bata palmas! 👏</span>`,
+  fala: 'Bata palmas devagar. Quantas sílabas tem essa palavra?',
+  ...opcoes(String(s.length), sortear(['1', '2', '3', '4', '5'].filter(x => +x !== s.length && +x <= s.length + 1), 2))
+})));
+
+function divisaoErrada(s) {
+  const w = s.join(''), certa = s.join('-'), out = new Set();
+  const rev = [...s].reverse().join('-'); if (rev !== certa) out.add(rev);
+  embaralhar(NUMS(1, w.length - 1)).forEach(k => {
+    const f = w.slice(0, k) + '-' + w.slice(k);
+    if (f !== certa && out.size < 2) out.add(f);
+  });
+  return [...out].slice(0, 2);
+}
+const quizDivisao = quiz(() => sortear(SILABAS.filter(x => x[1].length > 1), 5).map(([e, s]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="palavra">${s.join('')}</span><span class="perg">Qual é a divisão certa em sílabas?</span>`,
+  fala: 'Qual é a divisão certa da palavra em sílabas?',
+  ...opcoes(s.join('-'), divisaoErrada(s))
+})));
+
+const FRASES = [
+  ['O gato bebe ___.', 'leite', ['pedra', 'sapato']], ['A bola é ___.', 'redonda', ['quadrada', 'azeda']],
+  ['Eu escovo os ___.', 'dentes', ['sapatos', 'livros']], ['O pássaro ___ no céu.', 'voa', ['nada', 'escreve']],
+  ['À noite vemos a ___.', 'lua', ['banana', 'mesa']], ['Eu leio um ___.', 'livro', ['prato', 'sapato']]
+];
+const quizFrases = quiz(() => sortear(FRASES, 5).map(([f, certo, errados]) => ({
+  prompt: `<span class="frase">${f.replace('___', '<span class="lacuna">&nbsp;&nbsp;&nbsp;&nbsp;</span>')}</span><span class="perg">Qual palavra completa a frase?</span>`,
+  fala: f.replace('___', 'blá') + ' Qual palavra completa a frase?',
+  ...opcoes(certo, errados)
+})));
+
+const ordenarFrase = montar(() => sortear([
+  ['⚽', ['A', 'bola', 'é', 'redonda.']], ['🐱', ['O', 'gato', 'bebe', 'leite.']], ['🌙', ['A', 'lua', 'brilha', 'no', 'céu.']],
+  ['🐄', ['A', 'vaca', 'dá', 'leite.']], ['🪥', ['Eu', 'escovo', 'os', 'dentes.']], ['📚', ['Eu', 'leio', 'um', 'livro.']],
+  ['🐦', ['O', 'pássaro', 'voa', 'no', 'céu.']]
+], 5).map(([e, p]) => ({ emoji: e, pecas: p, sep: ' ', instr: 'Toque nas palavras para formar a frase.', fala: 'Toque nas palavras para formar a frase.' })), { rotulo: 'Frase' });
+
+const SINAIS = { '.': 'Ponto ( . )', '?': 'Interrogação ( ? )', '!': 'Exclamação ( ! )' };
+const quizPontuacao = quiz(() => sortear([
+  ['O cachorro late', '.'], ['Qual é o seu nome', '?'], ['Que festa linda', '!'], ['Você quer brincar', '?'],
+  ['Eu gosto de bolo', '.'], ['Cuidado', '!'], ['Onde está o meu lápis', '?'], ['A aula começou', '.']
+], 5).map(([f, s]) => ({
+  prompt: `<span class="frase">${f}<span class="lacuna">&nbsp;&nbsp;</span></span><span class="perg">Qual sinal vai no final da frase?</span>`,
+  fala: f + '. Qual sinal vai no final da frase?',
+  ...opcoes(SINAIS[s], Object.keys(SINAIS).filter(x => x !== s).map(x => SINAIS[x]))
+})));
+
+const CENAS = [
+  ['🐱', 'Mimi é um gatinho.'], ['🥛', 'Ele toma leite.'], ['😴', 'Depois, ele dorme.'],
+  ['🌰', 'A semente está na terra.'], ['💧', 'Eu coloco água.'], ['🌻', 'Nasce uma flor.'],
+  ['🌧️', 'Hoje está chovendo.'], ['☂️', 'Eu levo o guarda-chuva.'], ['🌈', 'Depois, surge o arco-íris.']
+];
+const quizTexto = quiz(() => sortear(CENAS, 5).map(([e, f]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">Qual frase combina com a figura?</span>`,
+  fala: 'Qual frase combina com a figura?',
+  ...opcoes(f, sortear(CENAS.filter(c => c[1] !== f).map(c => c[1]), 2))
+})));
+
+const ordenarHistoria = montar(() => sortear([
+  ['🌰', '🌱', '🌻'], ['🥚', '🐣', '🐔'], ['🍼', '🧒', '👨'], ['☁️', '🌧️', '🌈']
+], 3).map(p => ({ pecas: p, instr: 'Coloque as figuras na ordem da história: primeiro, depois e por último.', fala: 'Coloque as figuras na ordem da história.' })), { rotulo: 'História' });
+
+const BILHETES = [
+  { para: 'mamãe', de: 'Lia', trat: 'Querida mamãe,', txt: 'Fui brincar na casa da Ana. Volto às 5 horas.' },
+  { para: 'vovó', de: 'Pedro', trat: 'Querida vovó,', txt: 'Obrigado pelo presente. Eu adorei!' },
+  { para: 'professora', de: 'Davi', trat: 'Professora,', txt: 'Amanhã vou ao médico e não venho à aula.' },
+  { para: 'papai', de: 'Ana', trat: 'Papai,', txt: 'O almoço está na geladeira.' }
+];
+const bilheteHTML = b => `<div class="bilhete"><p>${b.trat}</p><p>${b.txt}</p><p class="ass">Beijos, ${b.de}.</p></div>`;
+const quizBilhete = quiz(() => Array.from({ length: 6 }, () => {
+  const b = BILHETES[aleat(BILHETES.length)], outros = BILHETES.filter(x => x !== b), para = aleat(2) === 0;
+  return {
+    prompt: `${bilheteHTML(b)}<span class="perg">${para ? 'Para quem é este bilhete?' : 'Quem escreveu este bilhete?'}</span>`,
+    fala: (para ? 'Para quem é este bilhete? ' : 'Quem escreveu este bilhete? ') + b.trat + ' ' + b.txt + ' Beijos, ' + b.de + '.',
+    ...(para ? opcoes(cap(b.para), sortear(outros, 2).map(x => cap(x.para))) : opcoes(b.de, sortear(outros, 2).map(x => x.de)))
+  };
+}));
+const montarBilhete = montar(() => sortear(BILHETES, 3).map(b => ({
+  emoji: '💌', pecas: [b.trat, b.txt, `Beijos, ${b.de}.`], sep: ' ',
+  instr: 'Monte o bilhete: primeiro para quem é, depois o recado e por último quem escreveu.',
+  fala: 'Monte o bilhete na ordem certa.'
+})), { rotulo: 'Bilhete' });
+
+/* ---------- Matemática ---------- */
+const quizHistNum = qa([
+  ['Antes de existirem os números escritos, como as pessoas contavam?', 'Com dedos, pedrinhas e riscos', ['Com calculadora', 'Com computador'], '🪨'],
+  ['Para que servem os números?', 'Para contar, medir e identificar', ['Só para enfeitar', 'Só para pintar'], '🔢'],
+  ['Qual destes é um número romano?', 'V', ['7', '10'], '🏛️'],
+  ['Em qual lugar vemos números no dia a dia?', 'No relógio, no dinheiro e na casa', ['Só nos livros de história', 'Em nenhum lugar'], '🕒'],
+  ['Os números que usamos hoje são 1, 2, 3, 4... Eles ajudam a gente a...', 'Contar e fazer contas', ['Dormir', 'Voar'], '🧮'],
+  ['Qual número romano é o cinco?', 'V', ['I', 'X'], '5️⃣']
+]);
+const memoriaRomanos = memoria(() => [['I', '1'], ['II', '2'], ['III', '3'], ['IV', '4'], ['V', '5'], ['X', '10']]);
+
+const quizVizinho = quiz(() => Array.from({ length: 6 }, () => {
+  const n = 2 + aleat(98), tipo = aleat(3);
+  if (tipo === 0) return { prompt: `<span class="letrao medio">${n} ?</span><span class="perg">Qual número vem DEPOIS do ${n}?</span>`, fala: `Qual número vem depois do ${n}?`, ...opcoes(String(n + 1), outrosNum(n + 1, 1, 100)) };
+  if (tipo === 1) return { prompt: `<span class="letrao medio">? ${n}</span><span class="perg">Qual número vem ANTES do ${n}?</span>`, fala: `Qual número vem antes do ${n}?`, ...opcoes(String(n - 1), outrosNum(n - 1, 1, 100)) };
+  const m = Math.min(n, 98);
+  return { prompt: `<span class="letrao medio">${m} ? ${m + 2}</span><span class="perg">Qual número fica no meio?</span>`, fala: `Qual número fica entre ${m} e ${m + 2}?`, ...opcoes(String(m + 1), outrosNum(m + 1, 1, 100)) };
+}));
+const quizSeq = quiz(() => Array.from({ length: 5 }, () => {
+  const passo = [1, 2, 5, 10][aleat(4)], ini = passo === 10 ? 10 * (1 + aleat(5)) : 1 + aleat(40);
+  const s = NUMS(0, 3).map(i => ini + i * passo), r = ini + 4 * passo;
+  return {
+    prompt: `<span class="letrao medio">${s.join(' ')} ?</span><span class="perg">Qual número continua a sequência?</span>`,
+    fala: `Qual número continua a sequência? ${s.join(', ')}.`,
+    ...opcoes(String(r), outrosNum(r, 1, 100))
+  };
+}));
+const memoriaExtenso = memoria(() => sortear([['10', 'dez'], ['20', 'vinte'], ['30', 'trinta'], ['40', 'quarenta'], ['50', 'cinquenta'], ['60', 'sessenta'], ['70', 'setenta'], ['80', 'oitenta'], ['90', 'noventa'], ['100', 'cem']], 6));
+
+const ordemNum = montar(() => Array.from({ length: 5 }, () => {
+  const cres = aleat(2) === 0;
+  const nums = sortear(NUMS(1, 99), 4).sort((a, b) => cres ? a - b : b - a).map(String);
+  return {
+    emoji: cres ? '📈' : '📉', pecas: nums, sep: ' ',
+    instr: cres ? 'Toque em ordem CRESCENTE: do menor para o maior.' : 'Toque em ordem DECRESCENTE: do maior para o menor.',
+    fala: cres ? 'Toque em ordem crescente, do menor para o maior.' : 'Toque em ordem decrescente, do maior para o menor.'
+  };
+}), { rotulo: 'Rodada' });
+const quizMaiorMenor = quiz(() => Array.from({ length: 5 }, () => {
+  const ns = sortear(NUMS(1, 99), 3), maior = aleat(2) === 0, c = maior ? Math.max(...ns) : Math.min(...ns);
+  return {
+    prompt: `<span class="perg">Qual é o ${maior ? 'MAIOR' : 'MENOR'} número?</span>`,
+    fala: `Qual é o ${maior ? 'maior' : 'menor'} número?`,
+    ...opcoes(String(c), ns.filter(x => x !== c).map(String))
+  };
+}));
+
+const quizUnidade = quiz(() => Array.from({ length: 6 }, () => {
+  if (aleat(2) === 0) {
+    const n = 1 + aleat(9), e = ['🟦', '🍎', '⭐', '🐟'][aleat(4)];
+    return { prompt: `${grp(e, n)}<span class="perg">Quantas unidades tem aqui?</span>`, fala: 'Conte. Quantas unidades tem aqui?', ...opcoes(String(n), outrosNum(n, 1, 9)) };
+  }
+  const n = 11 + aleat(88), u = n % 10;
+  return { prompt: `<span class="letrao">${n}</span><span class="perg">Quantas unidades tem no ${n}? (O número da direita)</span>`, fala: `Quantas unidades tem no número ${n}?`, ...opcoes(String(u), outrosNum(u, 0, 9)) };
+}));
+
+const quizDezena = quiz(() => Array.from({ length: 6 }, () => {
+  const t = aleat(3);
+  if (t === 0) { const d = 1 + aleat(9), u = aleat(10), n = d * 10 + u; return { prompt: `<span class="letrao">${n}</span><span class="perg">Quantas dezenas tem no ${n}? (O número da esquerda)</span>`, fala: `Quantas dezenas tem no número ${n}?`, ...opcoes(String(d), outrosNum(d, 1, 9)) }; }
+  if (t === 1) { const d = 1 + aleat(9), w = sortear(NUMS(1, 9).filter(x => x !== d).map(x => String(x * 10)), 2); return { prompt: `<span class="perg">${d} ${d === 1 ? 'dezena' : 'dezenas'} é igual a quanto?</span>`, fala: `${d} ${d === 1 ? 'dezena' : 'dezenas'} é igual a quanto?`, ...opcoes(String(d * 10), w) }; }
+  const d = 1 + aleat(9), u = 1 + aleat(9), n = d * 10 + u;
+  return { prompt: `<span class="perg">${d} ${d === 1 ? 'dezena' : 'dezenas'} e ${u} ${u === 1 ? 'unidade' : 'unidades'} formam qual número?</span>`, fala: `${d} dezenas e ${u} unidades formam qual número?`, ...opcoes(String(n), [String(u * 10 + d === n ? n + 1 : u * 10 + d), String(n + 10 > 99 ? n - 10 : n + 10)]) };
+}));
+
+const EMO_CONTAR = ['🍎', '⭐', '🐟', '🎈', '🌼', '🚗'];
+const vizinhos = (r, min, max) => sortear([r - 2, r - 1, r + 1, r + 2].filter(x => x >= min && x <= max && x !== r), 2);
+
+const quizAdicao = quiz(() => Array.from({ length: 6 }, () => {
+  const e = EMO_CONTAR[aleat(EMO_CONTAR.length)], a = 1 + aleat(5), b = 1 + aleat(5), r = a + b;
+  return {
+    prompt: `<span class="grupo">${e.repeat(a)}</span><span class="op">+</span><span class="grupo">${e.repeat(b)}</span><span class="perg">${a} + ${b} = ?</span>`,
+    fala: `${a} mais ${b} é igual a quanto?`, ...opcoes(String(r), vizinhos(r, 0, 12).map(String))
+  };
+}));
+const quizAdicao2 = quiz(() => Array.from({ length: 6 }, () => {
+  const a = aleat(11), b = aleat(11), r = a + b;
+  return { prompt: `<span class="letrao">${a} + ${b} = ?</span>`, fala: `${a} mais ${b} é igual a quanto?`, ...opcoes(String(r), outrosNum(r, 0, 20)) };
+}));
+const quizSubtracao = quiz(() => Array.from({ length: 6 }, () => {
+  const e = EMO_CONTAR[aleat(EMO_CONTAR.length)], a = 2 + aleat(8), b = 1 + aleat(a - 1), r = a - b;
+  return {
+    prompt: `<span class="grupo">${e.repeat(a)}</span><span class="perg">Tem ${a}. Se tirarmos ${b}, quanto sobra?</span><span class="op">${a} − ${b} = ?</span>`,
+    fala: `Tem ${a}. Se tirarmos ${b}, quanto sobra?`, ...opcoes(String(r), vizinhos(r, 0, 10).map(String))
+  };
+}));
+const quizSubtracao2 = quiz(() => Array.from({ length: 6 }, () => {
+  const a = 2 + aleat(19), b = 1 + aleat(a), r = a - b;
+  return { prompt: `<span class="letrao">${a} − ${b} = ?</span>`, fala: `${a} menos ${b} é igual a quanto?`, ...opcoes(String(r), outrosNum(r, 0, 20)) };
+}));
+
+const quizParImpar = quiz(() => Array.from({ length: 6 }, () => {
+  const n = 1 + aleat(30), par = n % 2 === 0;
+  return { prompt: `<span class="letrao">${n}</span><span class="perg">Esse número é par ou ímpar?</span>`, fala: `O número ${n} é par ou ímpar?`, ...opcoes(par ? 'Par' : 'Ímpar', [par ? 'Ímpar' : 'Par']) };
+}));
+const quizParImpar2 = quiz(() => Array.from({ length: 5 }, () => {
+  const par = aleat(2) === 0, pool = NUMS(1, 40);
+  const c = sortear(pool.filter(x => (x % 2 === 0) === par), 1)[0], err = sortear(pool.filter(x => (x % 2 === 0) !== par), 2);
+  return { prompt: `<span class="perg">Qual destes números é ${par ? 'PAR' : 'ÍMPAR'}?</span>`, fala: `Qual destes números é ${par ? 'par' : 'ímpar'}?`, ...opcoes(String(c), err.map(String)) };
+}));
+const quizSobra = quiz(() => Array.from({ length: 5 }, () => {
+  const n = 1 + aleat(10), par = n % 2 === 0, e = ['🐞', '🍓', '🦋', '🧦'][aleat(4)];
+  return {
+    prompt: `${grp(e, n)}<span class="perg">Junte de 2 em 2. Sobra algum?</span>`, fala: 'Junte de dois em dois. Sobra algum?',
+    ...opcoes(par ? '🙌 Não sobra: é PAR' : '☝️ Sobra 1: é ÍMPAR', [par ? '☝️ Sobra 1: é ÍMPAR' : '🙌 Não sobra: é PAR'])
+  };
+}));
+
+const quizMoedas = qa([
+  ['Qual é o nome do nosso dinheiro?', 'Real', ['Dólar', 'Euro'], '💰'],
+  ['Quantos centavos formam 1 real?', '100 centavos', ['10 centavos', '50 centavos'], '🪙'],
+  ['Qual símbolo usamos para o real?', 'R$', ['US$', '€'], '💵'],
+  ['Qual destas é uma moeda?', '🪙 A de 50 centavos', ['💵 A de 20 reais', '📄 Uma folha de caderno']],
+  ['Qual destas é uma cédula (nota)?', '💵 A de 10 reais', ['🪙 A de 25 centavos', '🪙 A de 1 real']],
+  ['Onde podemos usar o dinheiro para comprar?', 'No mercado e na padaria', ['Só no escuro', 'Só dentro do armário'], '🛒']
+], 5);
+const quizSomaDinheiro = quiz(() => Array.from({ length: 5 }, () => {
+  const v = [1, 2, 5, 10, 20], a = v[aleat(5)], b = v[aleat(5)], r = a + b;
+  return {
+    prompt: `<span class="frase">💵 ${a} reais + 💵 ${b} reais</span><span class="perg">Quanto dinheiro tem no total?</span>`,
+    fala: `${a} reais mais ${b} reais. Quanto dinheiro tem no total?`,
+    ...opcoes('R$ ' + r, outrosNum(r, 2, 40).map(x => 'R$ ' + x))
+  };
+}));
+const COMPRAS = [['🍬', 'o pirulito', [1, 2, 3]], ['🍎', 'a maçã', [2, 3, 4]], ['⚽', 'a bola', [8, 10, 15]], ['📒', 'o caderno', [6, 9, 12]], ['🥖', 'o pão', [1, 2, 3]], ['🧸', 'o ursinho', [12, 18, 25]]];
+const quizCompra = quiz(() => Array.from({ length: 6 }, () => {
+  const [e, nome, ps] = COMPRAS[aleat(COMPRAS.length)], p = ps[aleat(3)], m = [2, 5, 10, 20][aleat(4)], pode = m >= p;
+  return {
+    prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">${cap(nome)} custa R$ ${p}. Você tem R$ ${m}. Dá para comprar?</span>`,
+    fala: `${cap(nome)} custa ${p} reais. Você tem ${m} reais. Dá para comprar?`,
+    ...opcoes(pode ? 'Sim, dá! ✅' : 'Não dá ❌', [pode ? 'Não dá ❌' : 'Sim, dá! ✅'])
+  };
+}));
+
+/* ---------- Ciências ---------- */
+const SAUDAVEL = [['🍎', 'a maçã', 1], ['🍌', 'a banana', 1], ['🥕', 'a cenoura', 1], ['🥦', 'o brócolis', 1], ['🍉', 'a melancia', 1], ['🥗', 'a salada', 1], ['💧', 'a água', 1],
+  ['🍬', 'a bala', 0], ['🍭', 'o pirulito', 0], ['🍟', 'a batata frita', 0], ['🍩', 'a rosquinha', 0], ['🥤', 'o refrigerante', 0]];
+const quizSaudavel = quiz(() => sortear(SAUDAVEL, 6).map(([e, nome, s]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">Como é ${nome}?</span>`,
+  fala: `Como é ${nome}? Faz bem sempre, ou só de vez em quando?`,
+  ...opcoes(s ? '💚 Faz bem todo dia' : '🟡 Só de vez em quando', [s ? '🟡 Só de vez em quando' : '💚 Faz bem todo dia'])
+})));
+const GRUPOS_ALIM = [['🍎', 'a maçã', 'Fruta'], ['🍌', 'a banana', 'Fruta'], ['🍇', 'a uva', 'Fruta'], ['🍓', 'o morango', 'Fruta'],
+  ['🥕', 'a cenoura', 'Legume ou verdura'], ['🥦', 'o brócolis', 'Legume ou verdura'], ['🥬', 'a alface', 'Legume ou verdura'], ['🌽', 'o milho', 'Legume ou verdura'],
+  ['🍬', 'a bala', 'Doce'], ['🍩', 'a rosquinha', 'Doce'], ['🍫', 'o chocolate', 'Doce']];
+const quizGruposAlim = quiz(() => sortear(GRUPOS_ALIM, 6).map(([e, nome, g]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">${cap(nome)} é fruta, legume ou doce?</span>`,
+  fala: `${cap(nome)} é fruta, legume ou verdura, ou doce?`,
+  ...opcoes(g, ['Fruta', 'Legume ou verdura', 'Doce'].filter(x => x !== g))
+})));
+const memoriaAlim = memoria(() => sortear([['🍎', 'Maçã'], ['🍌', 'Banana'], ['🥕', 'Cenoura'], ['🥦', 'Brócolis'], ['🍇', 'Uva'], ['🍉', 'Melancia'], ['🥛', 'Leite'], ['🍓', 'Morango']], 6));
+
+const BINS = {
+  azul: { t: '🔵 Azul · papel', cor: '#1f5fbf' },
+  vermelha: { t: '🔴 Vermelha · plástico', cor: '#c0262d' },
+  verde: { t: '🟢 Verde · vidro', cor: '#1b7f53' },
+  amarela: { t: '🟡 Amarela · metal', cor: '#ffc933', tc: '#1d2742' },
+  marrom: { t: '🟤 Marrom · orgânico', cor: '#7a4a21' }
+};
+const LIXO = [['📰', 'o jornal velho', 'azul'], ['📦', 'a caixa de papelão', 'azul'], ['🍾', 'a garrafa de vidro', 'verde'], ['🫙', 'o pote de vidro', 'verde'],
+  ['🥫', 'a lata de milho', 'amarela'], ['🥤', 'o copo de plástico', 'vermelha'], ['🧴', 'a garrafa de plástico', 'vermelha'], ['🍌', 'a casca de banana', 'marrom'], ['🍎', 'o resto de maçã', 'marrom']];
+const quizLixeira = quiz(() => sortear(LIXO, 5).map(([e, nome, k]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">Em qual lixeira vai ${nome}?</span>`,
+  fala: `Em qual lixeira vai ${nome}?`,
+  ...opcoes(BINS[k], sortear(Object.keys(BINS).filter(x => x !== k), 2).map(x => BINS[x]))
+})));
+const REUSO = [
+  ['🍾', 'uma garrafa de plástico vazia', '🌱 Um vasinho de planta', ['🍫 Um bolo de chocolate', '🚮 Jogar na rua']],
+  ['📦', 'uma caixa de papelão', '🏠 Uma casinha de brinquedo', ['🌊 Jogar no rio', '🍽️ Um prato de comida']],
+  ['🍦', 'um pote de sorvete vazio', '✏️ Guardar lápis e canetas', ['🌳 Jogar no mato', '🚗 Virar um carro de verdade']],
+  ['📰', 'um jornal velho', '⛵ Fazer barquinho e chapéu de papel', ['🚮 Jogar na rua', '🍦 Virar sorvete']],
+  ['🧻', 'um rolinho de papel higiênico', '🔭 Fazer um binóculo de brinquedo', ['🌊 Jogar no mar', '🍕 Virar uma pizza']],
+  ['🔘', 'as tampinhas de garrafa', '🎨 Fazer jogos e artes', ['🚮 Jogar no chão', '🍬 Comer como bala']]
+];
+const quizReuso = quiz(() => sortear(REUSO, 5).map(([e, nome, certo, errados]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">O que podemos fazer com ${nome}?</span>`,
+  fala: `O que podemos fazer com ${nome}?`,
+  ...opcoes(certo, errados)
+})));
+
+const quizPlantas = qa([
+  ['Qual parte da planta fica embaixo da terra?', 'A raiz', ['A flor', 'A folha'], '🌱'],
+  ['Qual parte da planta é colorida e bonita?', 'A flor', ['A raiz', 'O caule'], '🌸'],
+  ['Qual parte da planta pega a luz do sol?', 'A folha', ['A raiz', 'O fruto'], '🌿'],
+  ['Qual parte sustenta a planta e leva a água para cima?', 'O caule', ['A flor', 'A semente'], '🌳'],
+  ['Do que a planta precisa para crescer?', 'Água, luz do sol e terra', ['Doces e refrigerante', 'Barulho e escuridão'], '🪴'],
+  ['De onde nasce uma planta nova?', 'De uma semente', ['De uma pedra', 'De uma bola'], '🌰'],
+  ['O que geralmente tem dentro do fruto?', 'Sementes', ['Pedras', 'Areia'], '🍎']
+], 5);
+const ordenarPlanta = montar(() => sortear([
+  ['🌰', '🌱', '🌳'], ['🌰', '🌱', '🌿', '🌻'], ['🌰', '🌱', '🌷']
+], 3).map(p => ({ pecas: p, instr: 'Como a planta cresce? Toque na ordem: da semente até a planta grande.', fala: 'Como a planta cresce? Toque na ordem.' })), { rotulo: 'Planta' });
+
+const AQUA = [['🐟', 'o peixe'], ['🐙', 'o polvo'], ['🦈', 'o tubarão'], ['🐬', 'o golfinho'], ['🦑', 'a lula'], ['🐠', 'o peixinho colorido']];
+const TERRA = [['🐘', 'o elefante'], ['🐄', 'a vaca'], ['🐶', 'o cachorro'], ['🐱', 'o gato'], ['🦁', 'o leão'], ['🐴', 'o cavalo'], ['🐒', 'o macaco'], ['🐇', 'o coelho']];
+const quizOndeVive = quiz(() => sortear([...AQUA.map(a => [...a, 1]), ...TERRA.map(a => [...a, 0])], 6).map(([e, nome, agua]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">${cap(nome)} vive na água ou na terra?</span>`,
+  fala: `${cap(nome)} vive na água ou na terra?`,
+  ...opcoes(agua ? '🌊 Na água' : '🌳 Na terra', [agua ? '🌳 Na terra' : '🌊 Na água'])
+})));
+const quizQualAnimal = quiz(() => Array.from({ length: 5 }, () => {
+  const agua = aleat(2) === 0, c = sortear(agua ? AQUA : TERRA, 1)[0], err = sortear(agua ? TERRA : AQUA, 2);
+  const t = a => `${a[0]} ${cap(a[1].replace(/^(o|a) /, ''))}`;
+  return { prompt: `<span class="perg">Qual animal vive ${agua ? 'na ÁGUA' : 'na TERRA'}?</span>`, fala: `Qual animal vive ${agua ? 'na água' : 'na terra'}?`, ...opcoes(t(c), err.map(t)) };
+}));
+const memoriaAnimais = memoria(() => sortear([...AQUA, ...TERRA].map(([e, n]) => [e, cap(n.replace(/^(o|a) /, ''))]), 6));
+
+const MAM = [['🐄', 'a vaca'], ['🐶', 'o cachorro'], ['🐱', 'o gato'], ['🐘', 'o elefante'], ['🐒', 'o macaco'], ['🐴', 'o cavalo'], ['🐬', 'o golfinho']];
+const AVE = [['🐔', 'a galinha'], ['🦆', 'o pato'], ['🦜', 'o papagaio'], ['🐧', 'o pinguim'], ['🦉', 'a coruja'], ['🦅', 'a águia']];
+const ANF = [['🐸', 'o sapo'], ['🐸', 'a rã'], ['🐸', 'a perereca']];
+const GR = { 'Mamífero': MAM, 'Ave': AVE, 'Anfíbio': ANF };
+const quizGrupoAnimal = quiz(() => Array.from({ length: 6 }, () => {
+  const g = Object.keys(GR)[aleat(3)], [e, nome] = GR[g][aleat(GR[g].length)];
+  return {
+    prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">${cap(nome)} é mamífero, ave ou anfíbio?</span>`,
+    fala: `${cap(nome)} é mamífero, ave ou anfíbio?`,
+    ...opcoes(g, Object.keys(GR).filter(x => x !== g))
+  };
+}));
+const quizCaract = qa([
+  ['Qual grupo de animais tem penas e bico?', 'Aves', ['Mamíferos', 'Anfíbios'], '🪶'],
+  ['Qual grupo de animais mama o leite da mãe?', 'Mamíferos', ['Aves', 'Anfíbios'], '🍼'],
+  ['Qual grupo de animais começa a vida na água e depois vive também na terra?', 'Anfíbios', ['Aves', 'Mamíferos'], '🐸'],
+  ['Os mamíferos geralmente têm o corpo coberto de...', 'Pelos', ['Penas', 'Escamas de peixe'], '🐕'],
+  ['As aves nascem de...', 'Ovos', ['Sementes', 'Flores'], '🥚'],
+  ['O filhote do sapo, que vive na água, se chama...', 'Girino', ['Pintinho', 'Bezerro'], '🐸'],
+  ['O pinguim é uma ave. Ele tem...', 'Penas e asas', ['Pelos e rabo', 'Casca e raiz'], '🐧']
+], 5);
+
+/* ---------- História/Geografia ---------- */
+const quizIdentidade = qa([
+  ['Qual documento mostra o nosso nome e o dia em que nascemos?', 'Certidão de nascimento', ['Cartão de aniversário', 'Lista de compras'], '📄'],
+  ['O nome completo de uma pessoa tem...', 'Nome e sobrenome', ['Só o apelido', 'Só o número do sapato'], '🪪'],
+  ['Cada pessoa é...', 'Única e especial', ['Igual a todas as outras', 'Sem importância'], '🌟'],
+  ['O que muda a cada aniversário?', 'A nossa idade', ['O nosso nome', 'O nosso sobrenome'], '🎂'],
+  ['O sobrenome mostra...', 'A que família a gente pertence', ['Qual é a nossa cor favorita', 'Que horas são'], '👨‍👩‍👧'],
+  ['Todas as crianças têm direito a ter...', 'Um nome e uma família que cuida delas', ['Só brinquedos caros', 'Nenhum nome'], '🧒']
+], 5);
+
+const quizFamilia = qa([
+  ['A mãe da minha mãe é minha...', 'Avó', ['Tia', 'Prima'], '👵'],
+  ['O pai do meu pai é meu...', 'Avô', ['Tio', 'Primo'], '👴'],
+  ['O irmão da minha mãe é meu...', 'Tio', ['Primo', 'Avô'], '👨'],
+  ['O filho do meu tio é meu...', 'Primo', ['Irmão', 'Avô'], '🧒'],
+  ['A filha dos meus pais, além de mim, é minha...', 'Irmã', ['Tia', 'Avó'], '👧'],
+  ['Quem cuida de nós e gosta da gente?', 'A nossa família', ['Só os desconhecidos', 'Ninguém'], '💙'],
+  ['Todas as famílias são exatamente iguais?', 'Não, cada família é diferente', ['Sim, todas são iguais', 'Só algumas têm amor'], '👨‍👩‍👧‍👦']
+], 5);
+const memoriaFamilia = memoria(() => sortear([['👵', 'Avó'], ['👴', 'Avô'], ['👨', 'Pai'], ['👩', 'Mãe'], ['👦', 'Irmão'], ['👧', 'Irmã'], ['👶', 'Bebê']], 6));
+
+const ATITUDES = [['dizer bom dia ao chegar', 1], ['esperar a sua vez na fila', 1], ['emprestar o brinquedo ao amigo', 1], ['ajudar um colega que caiu', 1],
+  ['dizer obrigado', 1], ['ouvir a professora com atenção', 1], ['pegar o lápis do colega sem pedir', 0], ['jogar lixo no chão', 0],
+  ['empurrar para passar na frente', 0], ['gritar com o colega', 0], ['rir de um colega que errou', 0]];
+const quizAtitude = quiz(() => sortear(ATITUDES, 6).map(([t, b]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">🤝</span><span class="perg">${cap(t)}.</span>`,
+  fala: `${cap(t)}. É uma boa atitude?`,
+  ...opcoes(b ? '👍 Boa atitude' : '👎 Não é uma boa atitude', [b ? '👎 Não é uma boa atitude' : '👍 Boa atitude'])
+})));
+const quizPalavrasMagicas = qa([
+  ['Qual palavra mágica usamos quando pedimos alguma coisa?', 'Por favor', ['Me dá agora', 'Quero logo'], '🙏'],
+  ['Qual palavra mágica usamos quando ganhamos ou recebemos algo?', 'Obrigado ou obrigada', ['Tá bom', 'Nada'], '🎁'],
+  ['Se esbarramos em alguém sem querer, dizemos...', 'Desculpa', ['Sai daí', 'Tchau'], '🙇'],
+  ['Quando chegamos de manhã, dizemos...', 'Bom dia', ['Boa noite', 'Até logo'], '🌅'],
+  ['Quando nos despedimos de alguém, dizemos...', 'Tchau, até logo', ['Bom dia', 'Com licença'], '👋'],
+  ['Quando queremos passar por alguém, dizemos...', 'Com licença', ['Sai da frente', 'Eu primeiro'], '🚶']
+], 5);
+
+const TRANSP = [['🚗', 'o carro', 'Terra'], ['🚌', 'o ônibus', 'Terra'], ['🚲', 'a bicicleta', 'Terra'], ['🚆', 'o trem', 'Terra'], ['🏍️', 'a moto', 'Terra'],
+  ['⛵', 'o barco a vela', 'Água'], ['🚢', 'o navio', 'Água'], ['🛶', 'a canoa', 'Água'], ['✈️', 'o avião', 'Ar'], ['🚁', 'o helicóptero', 'Ar']];
+const ROT_T = { Terra: '🛣️ Pela terra', 'Água': '🌊 Pela água', Ar: '☁️ Pelo ar' };
+const quizTransporte = quiz(() => sortear(TRANSP, 6).map(([e, nome, m]) => ({
+  prompt: `<span class="grande-emoji" aria-hidden="true">${e}</span><span class="perg">Por onde anda ${nome}?</span>`,
+  fala: `Por onde anda ${nome}? Pela terra, pela água ou pelo ar?`,
+  ...opcoes(ROT_T[m], Object.keys(ROT_T).filter(x => x !== m).map(x => ROT_T[x]))
+})));
+const memoriaTransporte = memoria(() => sortear(TRANSP.map(([e, n]) => [e, cap(n.replace(/^(o|a) /, ''))]), 6));
+
+const quizComunicacao = qa([
+  ['Qual meio mostra imagens e sons e a gente assiste?', 'Televisão', ['Rádio', 'Carta'], '📺'],
+  ['Qual meio leva uma mensagem escrita em papel pelo correio?', 'Carta', ['Televisão', 'Rádio'], '✉️'],
+  ['Qual meio traz as notícias impressas em papel?', 'Jornal', ['Rádio', 'Telefone'], '📰'],
+  ['Qual aparelho usamos para conversar com alguém que está longe?', 'Telefone', ['Geladeira', 'Ventilador'], '📱'],
+  ['Qual meio a gente só escuta?', 'Rádio', ['Televisão', 'Jornal'], '📻'],
+  ['Com o computador na internet, podemos...', 'Pesquisar e conversar com pessoas', ['Só dormir', 'Plantar feijão'], '💻']
+], 5);
+const memoriaComunicacao = memoria(() => [['✉️', 'Carta'], ['📻', 'Rádio'], ['📺', 'Televisão'], ['📰', 'Jornal'], ['📱', 'Telefone'], ['💻', 'Computador']]);
+
+/* ---------- Arte e Livros ---------- */
+const MISTURAS = [['🔴', '🟡', 'Vermelho e amarelo', 'Laranja'], ['🟡', '🔵', 'Amarelo e azul', 'Verde'], ['🔴', '🔵', 'Vermelho e azul', 'Roxo']];
+const COR_MIST = { Laranja: { t: 'Laranja', cor: '#c25e00' }, Verde: { t: 'Verde', cor: '#1b7f53' }, Roxo: { t: 'Roxo', cor: '#6a2fa0' } };
+const quizMisturas = quiz(() => embaralhar([
+  ...MISTURAS.map(([a, b, nome, r]) => ({
+    prompt: `<span class="grupo">${a} + ${b}</span><span class="perg">${nome} misturados dão qual cor?</span>`,
+    fala: `${nome} misturados dão qual cor?`,
+    ...opcoes(COR_MIST[r], Object.keys(COR_MIST).filter(x => x !== r).map(x => COR_MIST[x]))
+  })),
+  {
+    prompt: '<span class="perg">Qual destas é uma cor primária?</span>', fala: 'Qual destas é uma cor primária?',
+    ...opcoes({ t: 'Azul', cor: '#2a64c0' }, [COR_MIST.Verde, COR_MIST.Roxo])
+  },
+  {
+    prompt: '<span class="perg">Qual destas é uma cor primária?</span>', fala: 'Qual destas é uma cor primária?',
+    ...opcoes({ t: 'Amarelo', cor: '#ffc933', tc: '#1d2742' }, [COR_MIST.Laranja, COR_MIST.Roxo])
+  }
+]));
+
+const quizFormas = quiz(() => embaralhar([
+  { prompt: '<span class="grande-emoji">⚪</span><span class="perg">Que forma é essa?</span>', fala: 'Que forma é essa?', ...opcoes('Círculo', ['Triângulo', 'Quadrado']) },
+  { prompt: '<span class="grande-emoji">🔺</span><span class="perg">Que forma é essa?</span>', fala: 'Que forma é essa?', ...opcoes('Triângulo', ['Círculo', 'Quadrado']) },
+  { prompt: '<span class="grande-emoji">🟦</span><span class="perg">Que forma é essa?</span>', fala: 'Que forma é essa?', ...opcoes('Quadrado', ['Círculo', 'Triângulo']) },
+  { prompt: '<span class="perg">Qual forma tem 3 lados?</span>', fala: 'Qual forma tem 3 lados?', ...opcoes('🔺 Triângulo', ['⚪ Círculo', '🟦 Quadrado']) },
+  { prompt: '<span class="grande-emoji">⚽</span><span class="perg">A bola parece com qual forma?</span>', fala: 'A bola parece com qual forma?', ...opcoes('Círculo', ['Triângulo', 'Quadrado']) }
+]));
+
+/* =====================================================================
+   AS ATIVIDADES (matéria + joguinhos)
+   Para mudar a explicação, edite o texto dentro de "licao".
+   ===================================================================== */
+const abcSom = `<div class="abcs nao-ler">${PAL.map(([e, p, l]) => `<button class="lb" data-fala="Letra ${l}. ${l} de ${p.toLowerCase()}." aria-label="Letra ${l}, ${l} de ${p.toLowerCase()}"><span>${l}${l.toLowerCase()}</span><span class="emo" aria-hidden="true">${e}</span></button>`).join('')}</div>`;
+const g100 = `<div class="g100 nao-ler">${NUMS(1, 100).map(i => `<span class="${i % 10 === 0 ? 'dz' : ''}">${i}</span>`).join('')}</div>`;
+const dezUni = (d, u) => `<div class="conta nao-ler"><b>${d}</b><span class="rot">${d === 1 ? 'dezena' : 'dezenas'}</span><b>+</b><b>${u}</b><span class="rot">${u === 1 ? 'unidade' : 'unidades'}</span><b>=</b><b>${d * 10 + u}</b></div>`;
+
+const ATIV = {
+  /* ---------------- PORTUGUÊS ---------------- */
+  'alfabeto': {
+    titulo: '🔤 Alfabeto',
+    licao: `<h4>As letras do alfabeto</h4>
+      <p>O alfabeto tem 26 letras. Com elas escrevemos todas as palavras! Toque em cada letra para ouvir o nome dela e uma palavra que começa com ela.</p>
+      ${abcSom}
+      <h4>Vogais e consoantes</h4>
+      <p>As letras <strong>A, E, I, O, U</strong> são as <strong>vogais</strong>. As outras letras são as <strong>consoantes</strong>.</p>
+      ${abcVog}
+      <p>Cada letra tem a forma <strong>maiúscula</strong> (grande) e a forma <strong>minúscula</strong> (pequena). Usamos a maiúscula no começo do nome e das frases.</p>
+      ${dica('toda palavra tem pelo menos uma vogal! Na palavra BOLA, as vogais são o O e o A.')}`,
+    jogos: [
+      { emoji: '👂', nome: 'Escute a letra', desc: 'Ouça o nome da letra e toque nela.', run: quizOuvirLetra },
+      { emoji: '🔤', nome: 'Qual é a letra inicial?', desc: 'Olhe a figura e escolha a letra com que a palavra começa.', run: quizLetraInicial },
+      { emoji: '🃏', nome: 'Memória: figura e letra', desc: 'Vire as cartas e junte cada figura com a letra inicial dela.', run: memoria(() => sortear(PAL, 6).map(([e, p, l]) => [l, e])) },
+      { emoji: '✍️', nome: 'Cubra a letra', desc: 'Passe o dedo por cima da letra cinza para treinar a escrita.', run: tracar },
+      { emoji: '🔠', nome: 'Grande ou pequena?', desc: 'Encontre a mesma letra na outra forma: maiúscula e minúscula.', run: quizMinuscula }
+    ]
+  },
+  'silabas-simples': {
+    titulo: '🧩 Palavras com sílabas simples',
+    licao: `<h4>Letras juntas formam sílabas</h4>
+      <p>Quando juntamos uma consoante com uma vogal, formamos uma <strong>sílaba simples</strong>. Por exemplo: B + A = <strong>BA</strong>.</p>
+      <div class="abc nao-ler"><span>BA</span><span>BE</span><span>BI</span><span>BO</span><span>BU</span></div>
+      <p>Juntando sílabas simples, formamos palavras:</p>
+      ${ex([['🎲', 'DA·DO'], ['🎈', 'BO·LA'], ['🪆', 'BO·NE·CA'], ['🥗', 'SA·LA·DA']])}
+      <p>Leia devagar: DA... DO... <strong>DADO</strong>! BO... NE... CA... <strong>BONECA</strong>!</p>
+      ${dica('leia cada sílaba separada e depois junte rápido, como se fosse uma palavra só.')}`,
+    jogos: [
+      { emoji: '🧩', nome: 'Monte a palavra', desc: 'Toque nas sílabas na ordem certa para formar a palavra da figura.', run: juntar },
+      { emoji: '❓', nome: 'Qual sílaba falta?', desc: 'Escolha a sílaba que completa a palavra.', run: quizSilabaFalta },
+      { emoji: '🔎', nome: 'Que palavra é essa?', desc: 'Olhe a figura e leia as palavras para achar a certa.', run: quizPalavra }
+    ]
+  },
+  'divisao-silabica': {
+    titulo: '👏 Divisão silábica',
+    licao: `<h4>Separar a palavra em pedacinhos</h4>
+      <p>Dividir uma palavra em sílabas é separar a palavra em pedacinhos. Para descobrir, <strong>bata palmas</strong> enquanto fala devagar: cada palma é uma sílaba! 👏</p>
+      ${ex([['🐱', 'GA-TO'], ['🍌', 'BA-NA-NA'], ['🪆', 'BO-NE-CA'], ['🦋', 'BOR-BO-LE-TA']])}
+      <ul><li>Palavra com 1 sílaba: <strong>pé</strong>, <strong>sol</strong>.</li><li>Palavra com 2 sílabas: <strong>ga-to</strong>.</li><li>Palavra com 3 sílabas: <strong>ba-na-na</strong>.</li><li>Palavra com 4 sílabas: <strong>bor-bo-le-ta</strong>.</li></ul>
+      ${dica('em cada sílaba sempre existe uma vogal!')}`,
+    jogos: [
+      { emoji: '👏', nome: 'Quantas sílabas?', desc: 'Bata palmas e descubra quantas sílabas a palavra tem.', run: quizQuantasSil },
+      { emoji: '✂️', nome: 'Qual é a divisão certa?', desc: 'Escolha como separar a palavra em sílabas.', run: quizDivisao },
+      { emoji: '🧩', nome: 'Monte a palavra', desc: 'Toque nas sílabas na ordem certa.', run: juntar }
+    ]
+  },
+  'frases': {
+    titulo: '💬 Frases',
+    licao: `<h4>O que é uma frase</h4>
+      <p>Uma <strong>frase</strong> é um grupo de palavras que nos diz uma ideia completa.</p>
+      ${ex([['⚽', 'A bola é redonda.'], ['🐱', 'O gato bebe leite.']])}
+      <ul><li>A frase começa com letra <strong>maiúscula</strong>.</li><li>A frase termina com um sinal: o <strong>ponto ( . )</strong> quando contamos algo, a <strong>interrogação ( ? )</strong> quando perguntamos e a <strong>exclamação ( ! )</strong> quando nos surpreendemos.</li><li>As palavras ficam separadas, com um espacinho no meio.</li></ul>
+      <p>Exemplos: Eu gosto de bolo. Você gosta de bolo? Que bolo gostoso!</p>
+      ${dica('se as palavras estiverem fora de ordem, a frase fica sem sentido. Leia em voz alta para conferir!')}`,
+    jogos: [
+      { emoji: '🧱', nome: 'Monte a frase', desc: 'Toque nas palavras na ordem certa para formar a frase.', run: ordenarFrase },
+      { emoji: '📝', nome: 'Complete a frase', desc: 'Leia a frase e escolha a palavra que está faltando.', run: quizFrases },
+      { emoji: '❗', nome: 'Qual é o sinal final?', desc: 'Escolha o ponto, a interrogação ou a exclamação.', run: quizPontuacao }
+    ]
+  },
+  'textos': {
+    titulo: '🖼️ Pequenos textos',
+    licao: `<h4>Um texto é uma história pequenininha</h4>
+      <p>Um <strong>texto</strong> é feito de várias frases que contam uma história juntas. Olhe as figuras e leia uma frase para cada figura.</p>
+      <h4>O gatinho Mimi</h4>
+      ${cena([['🐱', 'Mimi é um gatinho.'], ['🥛', 'Ele toma leite.'], ['😴', 'Depois, ele dorme.']])}
+      <h4>A semente</h4>
+      ${cena([['🌰', 'A semente está na terra.'], ['💧', 'Eu coloco água.'], ['🌻', 'Nasce uma flor.']])}
+      ${dica('uma história tem começo, meio e fim. As figuras ajudam a entender o que está acontecendo!')}`,
+    jogos: [
+      { emoji: '🖼️', nome: 'Qual frase combina?', desc: 'Olhe a figura e escolha a frase certa.', run: quizTexto },
+      { emoji: '🔢', nome: 'Ordem da história', desc: 'Coloque as figuras na ordem em que a história acontece.', run: ordenarHistoria },
+      { emoji: '🧱', nome: 'Monte a frase', desc: 'Toque nas palavras na ordem certa.', run: ordenarFrase }
+    ]
+  },
+  'bilhete': {
+    titulo: '💌 Bilhete',
+    licao: `<h4>O que é um bilhete</h4>
+      <p>O <strong>bilhete</strong> é uma mensagem curta e rápida que escrevemos para alguém. Veja um exemplo:</p>
+      <div class="bilhete"><p>Querida mamãe,</p><p>Fui brincar na casa da Ana. Volto às 5 horas.</p><p class="ass">Beijos, Lia.</p></div>
+      <h4>As partes do bilhete</h4>
+      <ul><li><strong>Para quem é:</strong> o nome de quem vai ler. Exemplo: Querida mamãe.</li><li><strong>O recado:</strong> o que queremos dizer, com poucas palavras.</li><li><strong>Quem escreveu:</strong> o nosso nome no final.</li><li>Também podemos escrever o dia em que escrevemos.</li></ul>
+      ${dica('um bilhete bom é curtinho, educado e tem letra bem caprichada para o outro entender.')}`,
+    jogos: [
+      { emoji: '👀', nome: 'Leia o bilhete', desc: 'Descubra para quem é o bilhete e quem escreveu.', run: quizBilhete },
+      { emoji: '💌', nome: 'Monte o bilhete', desc: 'Coloque as partes do bilhete na ordem certa.', run: montarBilhete }
+    ]
+  },
+
+  /* ---------------- MATEMÁTICA ---------------- */
+  'hist-numeros': {
+    titulo: '📜 História dos números',
+    licao: `<h4>Antigamente, sem números</h4>
+      <p>Há muito, muito tempo, as pessoas ainda não tinham números escritos. Mesmo assim, elas precisavam contar os animais, os frutos e os dias. Então contavam de outros jeitos:</p>
+      ${ex([['🖐️', 'Dedos'], ['🪨', 'Pedrinhas'], ['🪢', 'Nós em cordas'], ['🪵', 'Riscos na madeira']])}
+      <h4>Os números foram inventados</h4>
+      <p>Com o tempo, muitos povos criaram símbolos para os números. Os romanos usavam letras: <strong>I</strong> é 1, <strong>V</strong> é 5 e <strong>X</strong> é 10. Ainda vemos números romanos em alguns relógios e livros.</p>
+      <p>Os números que usamos hoje, <strong>0, 1, 2, 3, 4, 5, 6, 7, 8 e 9</strong>, vieram de povos da Índia e foram espalhados pelos árabes. Por isso são chamados de números indo-arábicos.</p>
+      <h4>Para que servem os números?</h4>
+      <p>Usamos os números para contar, medir, saber a hora, o preço e o número da nossa casa.</p>
+      ${dica('procure números na sua casa: no relógio, no calendário e no controle da televisão!')}`,
+    jogos: [
+      { emoji: '❓', nome: 'Perguntas sobre os números', desc: 'Responda sobre como os números nasceram.', run: quizHistNum },
+      { emoji: '🏛️', nome: 'Memória dos números romanos', desc: 'Junte cada número romano com o número que usamos hoje.', run: memoriaRomanos }
+    ]
+  },
+  'numeros-100': {
+    titulo: '💯 Números até 100',
+    licao: `<h4>Contando até 100</h4>
+      <p>Depois do 9 vem o 10, depois o 19 vem o 20, e assim vamos até o <strong>100</strong>. Veja o quadro dos números. As casinhas coloridas são as dezenas inteiras: 10, 20, 30...</p>
+      ${g100}
+      <h4>Contando de 10 em 10</h4>
+      <p>10, 20, 30, 40, 50, 60, 70, 80, 90, 100.</p>
+      ${ex([['10', 'dez'], ['20', 'vinte'], ['30', 'trinta'], ['40', 'quarenta'], ['50', 'cinquenta'], ['60', 'sessenta'], ['70', 'setenta'], ['80', 'oitenta'], ['90', 'noventa'], ['100', 'cem']])}
+      ${dica('o número que vem depois é sempre 1 a mais, e o que vem antes é 1 a menos. Depois do 47 vem o 48, antes do 47 vem o 46.')}`,
+    jogos: [
+      { emoji: '↔️', nome: 'Antes, depois e no meio', desc: 'Descubra o número vizinho.', run: quizVizinho },
+      { emoji: '🪜', nome: 'Continue a sequência', desc: 'Conte de 1 em 1, de 2 em 2, de 5 em 5 e de 10 em 10.', run: quizSeq },
+      { emoji: '🃏', nome: 'Memória: número e nome', desc: 'Junte o número com o nome dele.', run: memoriaExtenso }
+    ]
+  },
+  'ordem': {
+    titulo: '📈 Ordem crescente e decrescente',
+    licao: `<h4>Ordem crescente</h4>
+      <p>Na ordem <strong>crescente</strong>, os números vão <strong>do menor para o maior</strong>. Eles vão crescendo!</p>
+      <div class="conta nao-ler"><b>3</b><b>›</b><b>8</b><b>›</b><b>15</b><b>›</b><b>40</b></div>
+      <h4>Ordem decrescente</h4>
+      <p>Na ordem <strong>decrescente</strong>, os números vão <strong>do maior para o menor</strong>. Eles vão diminuindo!</p>
+      <div class="conta nao-ler"><b>40</b><b>›</b><b>15</b><b>›</b><b>8</b><b>›</b><b>3</b></div>
+      ${dica('crescer é ficar maior, como uma planta. Decrescer é ficar menor, como uma vela que derrete!')}`,
+    jogos: [
+      { emoji: '📈', nome: 'Coloque em ordem', desc: 'Toque nos números em ordem crescente ou decrescente.', run: ordemNum },
+      { emoji: '🔟', nome: 'Números em ordem', desc: 'Toque nos números do menor para o maior e do maior para o menor.', run: sequencia },
+      { emoji: '🏆', nome: 'Qual é o maior? Qual é o menor?', desc: 'Compare os números e escolha.', run: quizMaiorMenor }
+    ]
+  },
+  'unidade': {
+    titulo: '1️⃣ Unidade',
+    licao: `<h4>O que é uma unidade</h4>
+      <p>Cada coisa sozinha é <strong>uma unidade</strong>. Uma maçã é 1 unidade. Três maçãs são 3 unidades.</p>
+      ${linhas('🍎', 5)}
+      <h4>Unidades nos números maiores</h4>
+      <p>O número da direita mostra as unidades. No número <strong>23</strong>, o 3 é a conta das unidades: são 3 unidades. No número <strong>47</strong>, são 7 unidades.</p>
+      ${dica('10 unidades juntas formam 1 dezena. Vamos ver isso no assunto das dezenas!')}`,
+    jogos: [
+      { emoji: '🔢', nome: 'Quantas unidades?', desc: 'Conte as figuras ou olhe o número da direita.', run: quizUnidade }
+    ]
+  },
+  'dezena': {
+    titulo: '🔟 Dezenas',
+    licao: `<h4>O que é uma dezena</h4>
+      <p>Uma <strong>dezena</strong> é um grupo de <strong>10 unidades</strong>.</p>
+      ${ex([['🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎', '10 unidades = 1 dezena']])}
+      <h4>Dezenas e unidades</h4>
+      <p>No número 23, o 2 é o número das <strong>dezenas</strong> e o 3 é o número das <strong>unidades</strong>.</p>
+      ${dezUni(2, 3)}
+      ${dezUni(4, 7)}
+      <p>2 dezenas são 20. 3 dezenas são 30. 5 dezenas são 50.</p>
+      ${dica('na esquerda ficam as dezenas, na direita ficam as unidades.')}`,
+    jogos: [
+      { emoji: '🔟', nome: 'Dezenas e unidades', desc: 'Descubra quantas dezenas e unidades têm os números.', run: quizDezena }
+    ]
+  },
+  'adicao': {
+    titulo: '➕ Adição simples',
+    licao: `<h4>Adição é juntar</h4>
+      <p>Quando <strong>juntamos</strong> coisas, ficamos com mais. Usamos o sinal de <strong>+</strong>, que se lê <strong>mais</strong>. O resultado é a <strong>soma</strong>.</p>
+      ${conta('🍎🍎', '+', '🍎', '🍎🍎🍎')}
+      <p>2 mais 1 é igual a 3.</p>
+      ${conta('3', '+', '4', '7')}
+      ${dica('use os dedinhos! Levante 3 dedos, junte mais 2... conte todos: são 5.')}`,
+    jogos: [
+      { emoji: '🍎', nome: 'Some com figuras', desc: 'Conte as figuras e descubra a soma.', run: quizAdicao },
+      { emoji: '🧮', nome: 'Contas de mais', desc: 'Resolva as contas só com os números.', run: quizAdicao2 }
+    ]
+  },
+  'subtracao': {
+    titulo: '➖ Subtração simples',
+    licao: `<h4>Subtração é tirar</h4>
+      <p>Quando <strong>tiramos</strong> coisas, ficamos com menos. Usamos o sinal de <strong>−</strong>, que se lê <strong>menos</strong>. O resultado é a <strong>diferença</strong>.</p>
+      ${conta('🍪🍪🍪🍪', '−', '🍪', '🍪🍪🍪')}
+      <p>4 menos 1 é igual a 3.</p>
+      ${conta('9', '−', '4', '5')}
+      ${dica('comece com todos os dedinhos e vá abaixando os que foram tirados. Quantos sobraram?')}`,
+    jogos: [
+      { emoji: '🍪', nome: 'Subtraia com figuras', desc: 'Veja quantos sobram quando tiramos alguns.', run: quizSubtracao },
+      { emoji: '🧮', nome: 'Contas de menos', desc: 'Resolva as contas só com os números.', run: quizSubtracao2 }
+    ]
+  },
+  'par-impar': {
+    titulo: '👯 Par e ímpar',
+    licao: `<h4>Número par</h4>
+      <p>Um número é <strong>par</strong> quando dá para juntar tudo de 2 em 2 e <strong>não sobra nenhum</strong>.</p>
+      ${ex([['🐞🐞', '2'], ['🐞🐞 🐞🐞', '4'], ['🐞🐞 🐞🐞 🐞🐞', '6']])}
+      <h4>Número ímpar</h4>
+      <p>Um número é <strong>ímpar</strong> quando, ao juntar de 2 em 2, <strong>sobra 1</strong>.</p>
+      ${ex([['🐞🐞 🐞', '3'], ['🐞🐞 🐞🐞 🐞', '5'], ['🐞🐞 🐞🐞 🐞🐞 🐞', '7']])}
+      <ul><li>Números pares terminam em 0, 2, 4, 6 ou 8.</li><li>Números ímpares terminam em 1, 3, 5, 7 ou 9.</li></ul>
+      ${dica('olhe só o último número! O 28 é par porque termina em 8. O 35 é ímpar porque termina em 5.')}`,
+    jogos: [
+      { emoji: '👯', nome: 'Par ou ímpar?', desc: 'Descubra se o número é par ou ímpar.', run: quizParImpar },
+      { emoji: '🔍', nome: 'Ache o número', desc: 'Escolha qual número é par ou ímpar.', run: quizParImpar2 },
+      { emoji: '🐞', nome: 'Sobra algum?', desc: 'Junte as figuras de 2 em 2 e veja se sobra.', run: quizSobra }
+    ]
+  },
+  'dinheiro': {
+    titulo: '💰 Sistema monetário',
+    licao: `<h4>O nosso dinheiro</h4>
+      <p>No Brasil, o nosso dinheiro se chama <strong>real</strong>. Escrevemos assim: <strong>R$</strong>. Usamos dinheiro para comprar coisas no mercado, na padaria e na loja.</p>
+      <h4>Moedas</h4>
+      ${ex([['🪙', '5 centavos'], ['🪙', '10 centavos'], ['🪙', '25 centavos'], ['🪙', '50 centavos'], ['🪙', '1 real']])}
+      <p>100 centavos formam 1 real.</p>
+      <h4>Cédulas (notas)</h4>
+      ${ex([['💵', '2 reais'], ['💵', '5 reais'], ['💵', '10 reais'], ['💵', '20 reais'], ['💵', '50 reais'], ['💵', '100 reais'], ['💵', '200 reais']])}
+      ${dica('antes de comprar, veja o preço e confira se o seu dinheiro é suficiente. Peça sempre ajuda a um adulto!')}`,
+    jogos: [
+      { emoji: '🪙', nome: 'Perguntas sobre o dinheiro', desc: 'Conheça as moedas e as cédulas.', run: quizMoedas },
+      { emoji: '➕', nome: 'Quanto dinheiro tem?', desc: 'Some o valor das cédulas.', run: quizSomaDinheiro },
+      { emoji: '🛒', nome: 'Dá para comprar?', desc: 'Compare o preço com o dinheiro que você tem.', run: quizCompra }
+    ]
+  },
+
+  /* ---------------- CIÊNCIAS ---------------- */
+  'alimentacao': {
+    titulo: '🥕 Alimentação saudável',
+    licao: `<h4>Comer bem faz crescer forte</h4>
+      <p>O que comemos dá energia para brincar, estudar e crescer. Uma alimentação saudável tem de tudo um pouco, com muitos alimentos naturais.</p>
+      ${ex([['🍎', 'Frutas'], ['🥕', 'Legumes'], ['🥬', 'Verduras'], ['💧', 'Água'], ['🥛', 'Leite'], ['🍚', 'Arroz e feijão']])}
+      <h4>Cuidados</h4>
+      <ul><li>Coma frutas, legumes e verduras todos os dias.</li><li>Beba bastante água.</li><li>Doces, balas, refrigerantes e frituras são só de vez em quando.</li><li>Lave as mãos antes de comer.</li><li>Escove os dentes depois de comer.</li></ul>
+      ${dica('um prato bonito é um prato colorido: quanto mais cores naturais, melhor!')}`,
+    jogos: [
+      { emoji: '💚', nome: 'Faz bem ou é só de vez em quando?', desc: 'Escolha os alimentos que fazem bem todo dia.', run: quizSaudavel },
+      { emoji: '🍓', nome: 'Fruta, legume ou doce?', desc: 'Separe os alimentos em grupos.', run: quizGruposAlim },
+      { emoji: '🃏', nome: 'Memória dos alimentos', desc: 'Junte cada figura com o nome do alimento.', run: memoriaAlim }
+    ]
+  },
+  'lixo': {
+    titulo: '♻️ Lixo e reciclagem',
+    licao: `<h4>Reutilizar é dar uma nova vida</h4>
+      <p>Muitas coisas que iriam para o lixo podem ser usadas de novo! Isso se chama <strong>reutilizar</strong>. Assim cuidamos da natureza e do nosso planeta.</p>
+      ${ex([['🍾', 'Garrafa vira vaso'], ['📦', 'Caixa vira casinha'], ['🥫', 'Lata vira porta-lápis'], ['🧻', 'Rolinho vira binóculo']])}
+      <h4>As lixeiras coloridas</h4>
+      <p>Quando não dá para reutilizar, separamos o lixo em lixeiras de cores diferentes. Assim ele pode ser <strong>reciclado</strong>, ou seja, virar uma coisa nova!</p>
+      <ul><li>🔵 Azul: papel e papelão.</li><li>🔴 Vermelha: plástico.</li><li>🟢 Verde: vidro.</li><li>🟡 Amarela: metal e latas.</li><li>🟤 Marrom: restos de comida.</li></ul>
+      ${dica('lembre dos três erres: <strong>Reduzir</strong>, que é usar menos; <strong>Reutilizar</strong>, que é usar de novo; e <strong>Reciclar</strong>, que é transformar em coisa nova.')}`,
+    jogos: [
+      { emoji: '🗑️', nome: 'Qual é a lixeira certa?', desc: 'Escolha a lixeira colorida para cada tipo de lixo.', run: quizLixeira },
+      { emoji: '💡', nome: 'Vamos reutilizar!', desc: 'Descubra o que podemos fazer com as coisas, em vez de jogar fora.', run: quizReuso }
+    ]
+  },
+  'plantas': {
+    titulo: '🌱 Plantas',
+    licao: `<h4>As plantas são seres vivos</h4>
+      <p>As plantas nascem, crescem e se reproduzem. Elas nos dão alimento, sombra e ar limpo.</p>
+      ${ex([['🌰', 'Semente'], ['🌿', 'Folha'], ['🌸', 'Flor'], ['🍎', 'Fruto']])}
+      <h4>As partes da planta</h4>
+      <ul><li><strong>Raiz:</strong> fica embaixo da terra, prende a planta e bebe a água.</li><li><strong>Caule:</strong> sustenta a planta e leva a água para cima.</li><li><strong>Folha:</strong> pega a luz do sol.</li><li><strong>Flor:</strong> é colorida e dela nasce o fruto.</li><li><strong>Fruto:</strong> guarda as sementes.</li></ul>
+      <h4>Do que a planta precisa</h4>
+      <p>Para crescer, a planta precisa de <strong>água</strong>, <strong>luz do sol</strong>, <strong>ar</strong> e <strong>terra</strong>.</p>
+      ${dica('plante um feijãozinho no algodão molhado e veja a raiz crescer!')}`,
+    jogos: [
+      { emoji: '🌿', nome: 'Partes da planta', desc: 'Responda sobre a raiz, o caule, a folha e a flor.', run: quizPlantas },
+      { emoji: '🌻', nome: 'Como a planta cresce', desc: 'Coloque na ordem: da semente até a planta grande.', run: ordenarPlanta }
+    ]
+  },
+  'animais-habitat': {
+    titulo: '🐟 Animais aquáticos e terrestres',
+    licao: `<h4>Onde os animais vivem</h4>
+      <p>Cada animal vive no lugar que combina com o corpo dele.</p>
+      <h4>Animais aquáticos</h4>
+      <p>Vivem na água, no mar, nos rios e nos lagos.</p>
+      ${ex([['🐟', 'Peixe'], ['🐙', 'Polvo'], ['🦈', 'Tubarão'], ['🐬', 'Golfinho']])}
+      <h4>Animais terrestres</h4>
+      <p>Vivem na terra, andando, correndo ou rastejando.</p>
+      ${ex([['🐘', 'Elefante'], ['🐄', 'Vaca'], ['🦁', 'Leão'], ['🐴', 'Cavalo']])}
+      ${dica('os peixes respiram na água e usam as nadadeiras para nadar. Os animais terrestres usam as patas para andar.')}`,
+    jogos: [
+      { emoji: '🌊', nome: 'Na água ou na terra?', desc: 'Descubra onde cada animal vive.', run: quizOndeVive },
+      { emoji: '🔍', nome: 'Qual animal vive aqui?', desc: 'Escolha o animal que vive na água ou na terra.', run: quizQualAnimal },
+      { emoji: '🃏', nome: 'Memória dos animais', desc: 'Junte cada figura com o nome do animal.', run: memoriaAnimais }
+    ]
+  },
+  'animais-grupos': {
+    titulo: '🐸 Mamíferos, aves e anfíbios',
+    licao: `<h4>Mamíferos</h4>
+      <p>Os <strong>mamíferos</strong> mamam o leite da mãe quando são filhotes. Quase todos têm pelos.</p>
+      ${ex([['🐶', 'Cachorro'], ['🐄', 'Vaca'], ['🐘', 'Elefante'], ['🐬', 'Golfinho']])}
+      <h4>Aves</h4>
+      <p>As <strong>aves</strong> têm penas, bico e asas, e nascem de ovos. Nem todas voam: o pinguim, por exemplo, nada!</p>
+      ${ex([['🐔', 'Galinha'], ['🦆', 'Pato'], ['🦜', 'Papagaio'], ['🐧', 'Pinguim']])}
+      <h4>Anfíbios</h4>
+      <p>Os <strong>anfíbios</strong> têm a pele lisa e úmida. Começam a vida na água, como girinos, e depois vivem também na terra.</p>
+      ${ex([['🐸', 'Sapo'], ['🐸', 'Rã'], ['🐸', 'Perereca']])}
+      ${dica('mamífero mama, ave tem pena, anfíbio nasce na água e depois sai!')}`,
+    jogos: [
+      { emoji: '🐾', nome: 'Qual é o grupo?', desc: 'Mamífero, ave ou anfíbio? Descubra!', run: quizGrupoAnimal },
+      { emoji: '🪶', nome: 'Características', desc: 'Responda sobre como são os animais de cada grupo.', run: quizCaract }
+    ]
+  },
+
+  /* ---------------- HISTÓRIA / GEOGRAFIA ---------------- */
+  'identidade': {
+    titulo: '🪪 Identidade',
+    licao: `<h4>Quem sou eu?</h4>
+      <p>Identidade é aquilo que faz de mim quem eu sou. Cada pessoa é única e especial!</p>
+      <ul><li><strong>Meu nome:</strong> eu tenho um nome e um sobrenome.</li><li><strong>Minha idade:</strong> ela muda a cada aniversário.</li><li><strong>Meu nascimento:</strong> o dia, o mês e o ano em que eu nasci.</li><li><strong>Meu jeito:</strong> o que eu gosto de comer, de brincar e de fazer.</li></ul>
+      <h4>Um documento muito importante</h4>
+      <p>A <strong>certidão de nascimento</strong> é o documento que mostra o nosso nome, o dia em que nascemos e o nome dos nossos pais.</p>
+      ${ex([['🪪', 'Meu nome'], ['🎂', 'Meu aniversário'], ['📄', 'Certidão'], ['🧒', 'Eu']])}
+      ${dica('converse com a sua família sobre a escolha do seu nome. Existe uma história por trás dele!')}`,
+    jogos: [
+      { emoji: '❓', nome: 'Perguntas sobre identidade', desc: 'Responda sobre nome, idade e documentos.', run: quizIdentidade },
+      { emoji: '🖍️', nome: 'Desenhe você', desc: 'Faça o seu autorretrato com o dedo.', run: pintar }
+    ]
+  },
+  'familia': {
+    titulo: '👨‍👩‍👧 Família',
+    licao: `<h4>Minha família</h4>
+      <p>Família são as pessoas que cuidam de nós e gostam da gente. Cada família é diferente: pode ter mãe, pai, avós, tios, irmãos, primos... e todas são importantes!</p>
+      ${ex([['👵', 'Avó'], ['👴', 'Avô'], ['👨', 'Pai'], ['👩', 'Mãe'], ['👦', 'Irmão'], ['👧', 'Irmã']])}
+      <h4>Quem é quem</h4>
+      <ul><li>A mãe do meu pai ou da minha mãe é a minha <strong>avó</strong>.</li><li>O irmão do meu pai ou da minha mãe é o meu <strong>tio</strong>.</li><li>O filho do meu tio é o meu <strong>primo</strong>.</li></ul>
+      ${dica('desenhe a sua família! Quem mora na sua casa? Quem mora perto?')}`,
+    jogos: [
+      { emoji: '👨‍👩‍👧', nome: 'Quem é quem na família?', desc: 'Descubra os parentescos.', run: quizFamilia },
+      { emoji: '🃏', nome: 'Memória da família', desc: 'Junte cada figura com o nome do parente.', run: memoriaFamilia }
+    ]
+  },
+  'convivencia': {
+    titulo: '🤝 Convivência',
+    licao: `<h4>Viver bem com os outros</h4>
+      <p>Convivência é o jeito de viver junto com a família, os colegas e os vizinhos. Para conviver bem, precisamos ter <strong>respeito</strong>.</p>
+      <h4>Palavras mágicas</h4>
+      ${ex([['🙏', 'Por favor'], ['🎁', 'Obrigado'], ['🙇', 'Desculpa'], ['🌅', 'Bom dia'], ['🚶', 'Com licença']])}
+      <h4>Boas atitudes</h4>
+      <ul><li>Esperar a sua vez.</li><li>Emprestar e dividir os brinquedos.</li><li>Ouvir quando o outro fala.</li><li>Ajudar quem precisa.</li><li>Respeitar as regras da casa e da escola.</li><li>Cuidar do que é de todos, como a sala e a praça.</li></ul>
+      ${dica('tratar os outros como gostamos de ser tratados deixa todo mundo feliz!')}`,
+    jogos: [
+      { emoji: '👍', nome: 'Boa atitude ou não?', desc: 'Escolha as atitudes que ajudam a conviver bem.', run: quizAtitude },
+      { emoji: '🙏', nome: 'Palavras mágicas', desc: 'Descubra qual palavra usar em cada situação.', run: quizPalavrasMagicas }
+    ]
+  },
+  'transportes': {
+    titulo: '🚌 Meios de transporte',
+    licao: `<h4>Como nos locomovemos</h4>
+      <p>Os <strong>meios de transporte</strong> levam pessoas e coisas de um lugar para outro.</p>
+      <h4>Transportes terrestres</h4>
+      <p>Andam pela terra, nas ruas e nos trilhos.</p>
+      ${ex([['🚗', 'Carro'], ['🚌', 'Ônibus'], ['🚲', 'Bicicleta'], ['🚆', 'Trem']])}
+      <h4>Transportes aquáticos</h4>
+      <p>Andam pela água, nos rios e no mar.</p>
+      ${ex([['⛵', 'Barco'], ['🚢', 'Navio'], ['🛶', 'Canoa']])}
+      <h4>Transportes aéreos</h4>
+      <p>Andam pelo ar.</p>
+      ${ex([['✈️', 'Avião'], ['🚁', 'Helicóptero']])}
+      ${dica('no carro, use sempre o cinto de segurança. Na bicicleta, use o capacete. Na rua, atravesse na faixa de pedestres.')}`,
+    jogos: [
+      { emoji: '🛣️', nome: 'Por onde anda?', desc: 'Pela terra, pela água ou pelo ar?', run: quizTransporte },
+      { emoji: '🃏', nome: 'Memória dos transportes', desc: 'Junte cada figura com o nome do transporte.', run: memoriaTransporte }
+    ]
+  },
+  'comunicacao': {
+    titulo: '📻 Meios de comunicação',
+    licao: `<h4>Conversar e saber das coisas</h4>
+      <p>Os <strong>meios de comunicação</strong> são as formas de enviar e receber mensagens e notícias.</p>
+      ${ex([['✉️', 'Carta'], ['📱', 'Telefone'], ['📻', 'Rádio'], ['📺', 'Televisão'], ['📰', 'Jornal'], ['💻', 'Computador e internet']])}
+      <ul><li>Com a <strong>carta</strong> mandamos um recado escrito, pelo correio.</li><li>Com o <strong>telefone</strong> falamos com quem está longe.</li><li>No <strong>rádio</strong> ouvimos músicas e notícias.</li><li>Na <strong>televisão</strong> vemos imagens e ouvimos sons.</li><li>No <strong>jornal</strong> lemos as notícias impressas.</li><li>Na <strong>internet</strong> pesquisamos e falamos com as pessoas.</li></ul>
+      ${dica('use o computador e o celular com um adulto por perto. A internet tem coisas ótimas, mas também precisa de cuidado!')}`,
+    jogos: [
+      { emoji: '📺', nome: 'Qual é o meio de comunicação?', desc: 'Descubra qual meio usamos em cada situação.', run: quizComunicacao },
+      { emoji: '🃏', nome: 'Memória da comunicação', desc: 'Junte cada figura com o nome do meio.', run: memoriaComunicacao }
+    ]
+  },
+
+  /* ---------------- ARTE E LIVROS ---------------- */
+  'arte': {
+    titulo: '🖌️ Cores e formas',
+    licao: `<h4>As cores primárias</h4>
+      <p>Existem três cores especiais, chamadas <strong>cores primárias</strong>: vermelho, amarelo e azul. Com elas fazemos todas as outras cores!</p>
+      ${ex([['🔴', 'Vermelho'], ['🟡', 'Amarelo'], ['🔵', 'Azul']])}
+      <h4>Misturando as cores</h4>
+      <ul><li>Vermelho mais amarelo dá laranja. 🟠</li><li>Amarelo mais azul dá verde. 🟢</li><li>Vermelho mais azul dá roxo. 🟣</li></ul>
+      <h4>As formas</h4>
+      <p>Também desenhamos com formas: o <strong>círculo</strong>, que é redondo; o <strong>quadrado</strong>, que tem 4 lados iguais; e o <strong>triângulo</strong>, que tem 3 lados. Uma casinha pode ser feita com um quadrado e um triângulo no telhado!</p>
+      ${ex([['⚪', 'Círculo'], ['🟦', 'Quadrado'], ['🔺', 'Triângulo']])}
+      ${dica('use a imaginação! Na arte, não existe desenho errado.')}`,
+    jogos: [
+      { emoji: '🎨', nome: 'Pintura livre', desc: 'Escolha uma cor e desenhe o que quiser com o dedo.', run: pintar },
+      { emoji: '🌈', nome: 'Mistura de cores', desc: 'Descubra qual cor nasce quando misturamos duas cores.', run: quizMisturas },
+      { emoji: '🔺', nome: 'Quais são as formas?', desc: 'Reconheça o círculo, o quadrado e o triângulo.', run: quizFormas }
+    ]
+  },
+  'livros': {
+    titulo: '📚 Habilidade com Leitura',
+    licao: `<h4>Ler é uma aventura</h4>
+      <p>Os livros levam a gente para lugares incríveis, só com a imaginação! Para ler cada vez melhor, siga estes passos:</p>
+      <ul><li>Olhe a capa e leia o título.</li><li>Aponte com o dedinho para cada palavra.</li><li>Junte as sílabas devagar: BO... LA... BOLA.</li><li>Olhe as figuras, elas ajudam a entender a história.</li></ul>
+      <h4>As partes do livro</h4>
+      ${ex([['📕', 'Capa'], ['✍️', 'Autor: quem escreveu'], ['🎨', 'Ilustrador: quem desenhou'], ['📄', 'Páginas']])}
+      ${dica('leia um pouquinho todos os dias, de preferência com alguém da família. E cuide bem dos seus livros: eles são tesouros!')}`,
+    jogos: [
+      { emoji: '📝', nome: 'Complete a frase', desc: 'Leia a frase e escolha a palavra que está faltando.', run: quizFrases },
+      { emoji: '🔎', nome: 'Que palavra é essa?', desc: 'Olhe a figura e leia as palavras para achar a certa.', run: quizPalavra }
+    ]
+  }
+};
+
+/* ---------- janela: matéria, escolha de jogos e jogo ---------- */
+const dlg = $('#licao'), corpo = $('#licCorpo');
+let atual = null;
+const topo = () => { corpo.scrollTop = 0; };
+
+/* toque nas letras do alfabeto: fala o nome e a palavra */
+corpo.addEventListener('click', e => {
+  const b = e.target.closest('[data-fala]');
+  if (b) { tom([523]); falar(b.dataset.fala); }
 });
-$('#fechar').onclick = () => dlg.close();
+
+function textoLicao() {
+  const c = corpo.querySelector('.materia').cloneNode(true);
+  c.querySelectorAll('.nao-ler').forEach(x => x.remove());
+  c.querySelectorAll('h4').forEach(x => x.append('. '));
+  c.querySelectorAll('.ex-i, li, .dica, .cena-i, .bilhete p').forEach(x => x.append(', '));
+  return c.textContent.replace(/[·]/g, ' ').replace(/-/g, ' ');
+}
+
+function mostrarLicao() {
+  parar();
+  corpo.innerHTML = `<div class="materia">${atual.licao}</div>
+    <div class="lic-acoes">
+      <button class="gb sec" id="lOuvir">🔊 Ouvir a matéria</button>
+      <button class="gb grande" id="lJogar">🎮 Jogar um joguinho</button>
+    </div>`;
+  $('#lOuvir').onclick = () => { if (!est.som) { aviso('Ligue o som para ouvir a matéria'); return; } tom([523, 659]); falar(textoLicao()); };
+  $('#lJogar').onclick = () => { tom([523, 659, 784]); menuJogos(); };
+  topo();
+}
+
+function menuJogos() {
+  parar();
+  corpo.innerHTML = `<h4 class="jt">🎮 Escolha um joguinho</h4>
+    <div class="jogos">${atual.jogos.map((j, i) => `<button class="jogo-op" data-i="${i}"><span class="je" aria-hidden="true">${j.emoji}</span><span>${j.nome}<small>${j.desc}</small></span></button>`).join('')}</div>
+    <div class="lic-acoes"><button class="gb sec" id="vLicao">← Voltar para a matéria</button></div>`;
+  corpo.querySelectorAll('.jogo-op').forEach(b => b.onclick = () => { tom([523, 659, 784]); jogar(+b.dataset.i); });
+  $('#vLicao').onclick = mostrarLicao;
+  topo();
+}
+
+function jogar(i) {
+  parar();
+  const j = atual.jogos[i];
+  corpo.innerHTML = `<div class="nav-j"><button class="gb sec peq" id="vJogos">← Outros jogos</button></div>
+    <h4 class="jt">${j.emoji} ${j.nome}</h4><p class="jd">${j.desc}</p><div id="jogoArea"></div>`;
+  $('#vJogos').onclick = menuJogos;
+  topo();
+  j.run($('#jogoArea'), () => jogar(i));
+}
+
+function abrirAtividade(id, sec) {
+  atual = ATIV[id]; if (!atual) return;
+  tom([523, 659, 784]);
+  dlg.style.setProperty('--cor', sec.style.getPropertyValue('--cor') || 'var(--azul)');
+  $('#licTitulo').textContent = atual.titulo;
+  mostrarLicao();
+  if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute('open', '');
+}
+$$('.atividade').forEach(b => b.onclick = () => abrirAtividade(b.dataset.id, b.closest('.secao')));
+$('#licFechar').onclick = () => dlg.close();
 dlg.addEventListener('close', parar);
 
 /* ---------- destaca no menu a seção que está na tela ---------- */
